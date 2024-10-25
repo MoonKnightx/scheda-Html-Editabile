@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Expired</title>
+  <style>
+    :root {
+      --number-input-style: textfield;
+    }
+
+    /* Per Webkit (Chrome, Safari, Edge) */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Per Firefox */
+    input[type="number"] {
+      appearance: var(--number-input-style);
+      -moz-appearance: var(--number-input-style);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .item1 {
+      grid-area: header;
+    }
+
+    .item2 {
+      grid-area: img;
+    }
+
+    .item3 {
+      grid-area: caratteristiche;
+    }
+
+    .item4 {
+      grid-area: parametri;
+    }
+
+    .item5 {
+      grid-area: tratti;
+    }
+
+    .item6 {
+      grid-area: valori;
+    }
+
+    .item7 {
+      grid-area: deformazione_innesco;
+    }
+
+    .item8 {
+      grid-area: talenti;
+    }
+
+    .item9 {
+      grid-area: tecniche;
+    }
+
+    .item10 {
+      grid-area: footer;
+    }
+
+    .grind_container {
+      display: grid;
+      gap: 10px;
+      background-color: #2196f3;
+      padding: 10px;
+
+      /* Definizione delle dimensioni delle colonne e righe */
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      /* 4 colonne di larghezza uguale */
+      grid-template-rows: auto auto auto auto auto auto auto auto;
+      /* Altezza delle righe automatica */
+
+      grid-template-areas:
+        "header header header header"
+        "img caratteristiche parametri parametri"
+        "img caratteristiche parametri parametri"
+        "img caratteristiche parametri parametri"
+        "valori valori valori valori"
+        "tratti tratti tratti tratti"
+        "deformazione_innesco deformazione_innesco talenti talenti"
+        "tecniche tecniche tecniche tecniche"
+        "footer footer footer footer";
+    }
+
+    .grind_container>div {
+      background-color: rgba(255, 255, 255, 0.8);
+      /* text-align: center; */
+      padding: 10px 0px;
+      font-size: 25px;
+    }
+
+    /* Espansione dell'immagine su più righe */
+    .item2 {
+      grid-row: span 3;
+    }
+
+    .parametri1 {
+      grid-area: parametri1;
+    }
+
+    .parametri2 {
+      grid-area: parametri2;
+    }
+
+    .parametri3 {
+      grid-area: parametri3;
+    }
+
+    .parametri4 {
+      grid-area: parametri4;
+    }
+
+    .gridContainer_parametri {
+      display: grid;
+      gap: 10px;
+      background-color: red;
+      padding: 10px;
+
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: auto auto auto auto auto auto auto auto;
+
+      grid-template-areas:
+        "parametri1 parametri2"
+        "parametri3 parametri4";
+    }
+
+    .gridContainer_parametri>div {
+      background-color: pink;
+      text-align: center;
+      padding: 10px 0px;
+      font-size: 25px;
+    }
+
+    .item6,
+    .item5 {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .BoxValore,
+    .BoxTratti {
+      flex: 1;
+      background-color: #f9f9f9;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .BoxValore input,
+    .BoxTratti input {
+      width: 100px;
+      margin: 5px 0;
+    }
+
+    /* Flex per i campi di movimento e scatto */
+    .flexInputContainer {
+      display: flex;
+      gap: 10px;
+    }
+
+    .flexInputContainer input {
+      flex: 1;
+    }
+
+    /* Per la disposizione verticale */
+    .boxCaratteristica {
+      margin-bottom: 10px;
+    }
+
+    /* Per i campi con input affiancati */
+    .flexInputs {
+      display: flex;
+      gap: 10px;
+    }
+
+    .boxScatto input,
+    .boxMovimento input {
+      width: 250px;
+    }
+
+    .boxTalenti {
+      margin-bottom: 20px;
+    }
+
+    .talento-wrapper {
+      display: flex;
+      /* Flexbox per allineare gli elementi in orizzontale */
+      align-items: top;
+      /* Centra l'input number verticalmente */
+    }
+
+    .level {
+      width: 50px;
+      /* Imposta la larghezza del campo numerico */
+      height: 80px;
+      text-align: center;
+      /* Centra il numero nel campo */
+      padding: 8px;
+      /* Aggiunge padding per migliorare l'allineamento verticale */
+      border: 1px solid #ccc;
+    }
+
+    .item8 {
+      display: flex;
+      flex-direction: column;
+      padding-top: 0 !important;
+    }
+
+    .buttonTalenti {
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .BoxTitoloElementi {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 5px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="">
+    <div class="grind_container">
+      <div class="item1">
+        Header
+        <div class="playerNameBox">
+          <input type="text" placeholder="nome giocatore" />
+        </div>
+      </div>
+      <div class="item2">
+        <div class="imgBox">
+          <input type="file" name="image" id="image" />
+        </div>
+      </div>
+      <div class="item3">
+        <div class="boxCaratteristica">
+          <label for="inputPgName">Nome Personaggio</label><br />
+          <input type="text" id="inputPgName" />
+        </div>
+        <div class="boxCaratteristica">
+          <label for="inputPgRaze">Razza</label><br />
+          <input type="text" id="inputPgRaze" />
+        </div>
+        <div class="boxCaratteristica">
+          <label for="inputPgClass">Classe</label><br />
+          <input type="text" id="inputPgClass" />
+        </div>
+        <div class="boxCaratteristica">
+          <div class="flexInputContainer">
+            <div class="boxMovimento">
+              <label for="inputMovimentoPG">Movimento</label>
+              <input type="text" id="inputMovimentoPG" />
+            </div>
+            <div class="boxScatto">
+              <label for="inputScattoPG">Scatto</label><br />
+              <input type="text" id="inputScattoPG" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item4">
+        <div class="gridContainer_parametri">
+          <div class="parametri1">
+            <label for="Attacco">Attacco</label><br />
+            <input type="number" id="Attacco" />
+          </div>
+          <div class="parametri2">
+            <label for="Mira">Mira</label><br />
+            <input type="number" id="Mira" />
+          </div>
+          <div class="parametri3">
+            <label for="Resistenza">Resistenza</label><br />
+            <input type="number" id="Resistenza" />
+          </div>
+          <div class="parametri4">
+            <label for="Velocita">Velocita</label><br />
+            <input type="number" id="Velocita" />
+          </div>
+        </div>
+      </div>
+      <div class="item5">
+        <div class="BoxTratti flexInput">
+          <label for="IntellettoValue">Intelletto</label><br />
+          <input type="number" id="IntellettoValue" />
+          <input type="number" id="IntellettoValue2" />
+        </div>
+
+        <div class="BoxTratti flexInput">
+          <label for="SensiValue">Sensi</label><br />
+          <input type="number" id="SensiValue" />
+          <input type="number" id="SensiValue2" />
+        </div>
+
+        <div class="BoxTratti flexInput">
+          <label for="AdattabilitaValue">Adattabilita</label><br />
+          <input type="number" id="AdattabilitaValue" />
+          <input type="number" id="AdattabilitaValue2" />
+        </div>
+
+        <div class="BoxTratti flexInput">
+          <label for="IstintoValue">Istinto</label><br />
+          <input type="number" id="IstintoValue" />
+          <input type="number" id="IstintoValue2" />
+        </div>
+
+        <div class="BoxTratti flexInput">
+          <label for="FisicoValue">Fisico</label><br />
+          <input type="number" id="FisicoValue" />
+          <input type="number" id="FisicoValue2" />
+        </div>
+
+        <div class="BoxTratti flexInput">
+          <label for="RobustezzaValue">Robustezza</label><br />
+          <input type="number" id="RobustezzaValue" />
+          <input type="number" id="RobustezzaValue2" />
+        </div>
+      </div>
+      <div class="item6">
+        <div class="BoxValore flexInput">
+          <label for="HP">Punti Vita</label><br />
+          <input type="number" id="HP" />
+          <input type="number" id="MaxHP" /><br />
+          <label for="RecuperoHP">Recupero</label>
+          <input type="number" id="RecuperoHP" />
+        </div>
+        <div class="BoxValore flexInput">
+          <label for="Stamina">Stamina</label><br />
+          <input type="number" id="Stamina" />
+          <input type="number" id="StaminaMax" /><br />
+          <label for="RecuperoStamina">Recupero</label>
+          <input type="number" id="RecuperoStamina" />
+        </div>
+        <div class="BoxValore flexInput">
+          <label for="Nucleo_Innesto">Nucleo/Innesto</label><br />
+          <input type="number" id="Nucleo_Innesto" />
+          <input type="number" id="Nucleo_InnestoMax" /><br />
+          <label for="RecuperoNucleo_Innesto">Recupero</label>
+          <input type="number" id="RecuperoNucleo_Innesto" />
+        </div>
+      </div>
+      <div class="item7">
+        <label for="deformazione_innescoText">Deformazione e Innesco</label><br />
+        <textarea name="deformazione_innescoText" id="deformazione_innescoText" cols="60" rows="15"></textarea>
+      </div>
+      <div class="item8">
+        <div class="BoxTitoloElementi">
+          <h3>Talenti</h3>
+        </div>
+        <div id="talentiContainer">
+          <div class="boxTalenti">
+            <input type="text" name="nameTalento" placeholder="nome talento"><br>
+            <div class="talento-wrapper">
+              <textarea name="textTalento" cols="55" rows="2"></textarea>
+              <input type="number" class="level" placeholder="LV">
+            </div>
+          </div>
+
+          <div class="boxTalenti">
+            <input type="text" name="nameTalento" placeholder="nome talento"><br>
+            <div class="talento-wrapper">
+              <textarea name="textTalento" cols="55" rows="2"></textarea>
+              <input type="number" class="level" placeholder="LV">
+            </div>
+          </div>
+
+          <div class="boxTalenti">
+            <input type="text" name="nameTalento" placeholder="nome talento"><br>
+            <div class="talento-wrapper">
+              <textarea name="textTalento" cols="55" rows="2"></textarea>
+              <input type="number" class="level" placeholder="LV">
+            </div>
+          </div>
+        </div>
+        <div class="buttonTalenti">
+          <button onclick="aggiungiTalento()">Aggiungi</button>
+          <button onclick="rimuoviTalento()">Rimuovi</button>
+        </div>
+      </div>
+      <div class="item9">tecniche</div>
+      <div class="item10">footer</div>
+    </div>
+  </form>
+
+  <script>
+    // Array per memorizzare i riferimenti di tutti i talenti
+    let talenti = [];
+
+    // Al caricamento della pagina, aggiungi i talenti iniziali
+    window.onload = function () {
+      const talentiIniziali = document.querySelectorAll(".boxTalenti");
+      talenti = Array.from(talentiIniziali); // Converte NodeList in array e assegna all'array talenti
+    }
+
+    function aggiungiTalento() {
+      if (event) event.preventDefault(); // Previene il ricaricamento, se l'evento è presente
+
+      // Crea un nuovo boxTalenti
+      const nuovoBoxTalenti = document.createElement("div");
+      nuovoBoxTalenti.className = "boxTalenti";
+
+      // Aggiungi il contenuto HTML del box
+      nuovoBoxTalenti.innerHTML = `
+        <input type="text" name="nameTalento" placeholder="nome talento"><br>
+        <div class="talento-wrapper">
+            <textarea name="textTalento" cols="55" rows="2"></textarea>
+            <input type="number" class="level" placeholder="LV">
+        </div>
+    `;
+
+      // Aggiungi il box al contenitore
+      document.getElementById("talentiContainer").appendChild(nuovoBoxTalenti);
+
+      // Aggiungi il nuovo box all'array dei talenti
+      talenti.push(nuovoBoxTalenti);
+
+      // Inserisci il nuovo boxTalenti prima del pulsante
+      const buttonContainer = document.querySelector(".buttonTalenti");
+      buttonContainer.before(nuovoBoxTalenti);
+    }
+
+    function rimuoviTalento() {
+      if (event) event.preventDefault(); // Previene il ricaricamento, se l'evento è presente
+
+      // Chiede all'utente il numero del talento da rimuovere
+      const numero = parseInt(prompt("Inserisci il numero del talento da rimuovere (1 per il primo, 2 per il secondo, ecc. sono numerati dall'altro verso il basso):"));
+
+      // Verifica se il numero è valido
+      if (numero > 0 && numero <= talenti.length) {
+        // Rimuovi il talento dall'array e dal DOM
+        const talentoDaRimuovere = talenti[numero - 1];
+        talentoDaRimuovere.remove(); // Rimuove il box dal DOM
+        talenti.splice(numero - 1, 1); // Rimuove il riferimento dall'array
+      } else {
+        alert("Numero non valido. Riprova.");
+      }
+    }
+
+    function aggiornaNumeriTalenti() {
+      // Aggiunge o aggiorna i numeri per ciascun talento
+      talenti.forEach((talento, index) => {
+        // Se non esiste, crea l'elemento per mostrare il numero del talento
+        let numeroElemento = talento.querySelector(".numero-talento");
+        if (!numeroElemento) {
+          numeroElemento = document.createElement("span");
+          numeroElemento.className = "numero-talento";
+          talento.prepend(numeroElemento); // Posiziona il numero in cima al box
+        }
+        // Aggiorna il testo con il numero corretto
+        numeroElemento.textContent = `Talento #${index + 1}`;
+      });
+    }
+  </script>
+</body>
+
+</html>
