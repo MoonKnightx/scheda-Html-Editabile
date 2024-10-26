@@ -68,7 +68,27 @@
     }
 
     .item10 {
-      grid-area: footer;
+      grid-area: invetario;
+    }
+
+    .item11 {
+      grid-area: note;
+    }
+
+    .item12 {
+      grid-area: background;
+    }
+
+    .item13 {
+      grid-area: descrzione;
+    }
+
+    .item14 {
+      grid-area: personalita;
+    }
+
+    .item15 {
+      grid-area: obbiettivi;
     }
 
     .grind_container {
@@ -92,7 +112,9 @@
         "tratti tratti tratti tratti"
         "deformazione_innesco deformazione_innesco talenti talenti"
         "tecniche tecniche tecniche tecniche"
-        "footer footer footer footer";
+        "invetario invetario note note"
+        "descrzione descrzione background background"
+        "personalita personalita obbiettivi obbiettivi";
     }
 
     .grind_container>div {
@@ -166,6 +188,10 @@
       margin: 5px 0;
     }
 
+    .BoxValore #Contatore {
+      width: 65%;
+    }
+
     /* Flex per i campi di movimento e scatto */
     .flexInputContainer {
       display: flex;
@@ -214,10 +240,13 @@
       border: 1px solid #ccc;
     }
 
+    .removeTopPadding{
+      padding-top: 0 !important; /* forse non servira più, rimuovi il top padding dal grind area */
+    }
+
     .item8 {
       display: flex;
       flex-direction: column;
-      padding-top: 0 !important;
     }
 
     .buttonTalenti {
@@ -232,6 +261,48 @@
       padding: 5px;
       margin-bottom: 15px;
     }
+
+    .item9 {
+      width: 100%;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 3px solid black;
+    }
+
+    .nomeTecnica,
+    .descrzioneTecnica,
+    .costoTecnica {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .costoTecnica{
+      height: 122px;
+    }
+
+    th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+
+    .deleteTecnica{
+      width: 30px;
+      color: red;
+    }
+
+    .boxCostoTecnica_and_deleteButton{
+      display: flex;
+      align-items: stretch;
+    }
+
   </style>
 </head>
 
@@ -354,12 +425,16 @@
           <label for="RecuperoNucleo_Innesto">Recupero</label>
           <input type="number" id="RecuperoNucleo_Innesto" />
         </div>
+        <div class="BoxValore flexInput">
+          <label for="Contatore">Contatore</label><br />
+          <input type="text" id="Contatore" />
+        </div>
       </div>
       <div class="item7">
         <label for="deformazione_innescoText">Deformazione e Innesco</label><br />
         <textarea name="deformazione_innescoText" id="deformazione_innescoText" cols="60" rows="15"></textarea>
       </div>
-      <div class="item8">
+      <div class="item8 removeTopPadding">
         <div class="BoxTitoloElementi">
           <h3>Talenti</h3>
         </div>
@@ -393,8 +468,35 @@
           <button onclick="rimuoviTalento()">Rimuovi</button>
         </div>
       </div>
-      <div class="item9">tecniche</div>
-      <div class="item10">footer</div>
+      <div class="item9 removeTopPadding">
+        <table id="tecnicheTable">
+          <thead>
+            <tr>
+              <th>Tecnica</th>
+              <th>Costo</th>
+            </tr>
+          </thead>
+            <tr>
+              <td>
+                <input type="text" placeholder="Nome tecnica" class="nomeTecnica"><br>
+                <textarea placeholder="Descrizione tecnica" cols="50" rows="2" class="descrzioneTecnica"></textarea>
+              </td>
+              <td>
+                <div class="boxCostoTecnica_and_deleteButton">
+                  <textarea placeholder="Costo tecnica" cols="20" rows="2" class="costoTecnica"></textarea>
+                  <button class="deleteTecnica" onclick="rimuoviRiga(this)">X</button>
+                </div>
+              </td>
+            </tr>
+        </table>
+        <button onclick="aggiungiRiga()">Aggiungi Tecnica</button>
+      </div>
+      <div class="item10">inventario</div>
+      <div class="item11">note</div>
+      <div class="item12">Background</div>
+      <div class="item13">Descrzione</div>
+      <div class="item14">Personalita</div>
+      <div class="item15">Obbiettivi</div>
     </div>
   </form>
 
