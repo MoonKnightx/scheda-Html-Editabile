@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Expired</title>
   <style>
-
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -16,8 +15,8 @@
     }
 
     /* Per Firefox */
-    input[type=number]{
-    -moz-appearance: textfield;
+    input[type=number] {
+      -moz-appearance: textfield;
     }
 
     * {
@@ -489,14 +488,14 @@
           <input type="text" placeholder="nome giocatore" id="PlayerName" />
         </div>
         <div class="loadAndSaveBox">
-          <input type="file" id="fileInput" onchange="caricaDati(event)" style="display: none;">
+          <input type="file" id="fileInput" accept=".json" onchange="caricaDati()" style="display: none;">
           <button onclick="document.getElementById('fileInput').click()">Carica</button>
           <button onclick="salvaDati()">Salva</button>
         </div>
       </div>
       <div class="item2">
         <div class="imgBox">
-          <input type="file" name="image" id="image" accept="image/*" onchange=" caricaImmagine(event) " />
+          <input type="file" name="image" id="image" accept="image/*" onchange=" caricaImmagine(event)" />
           <div id="previewContainer">
             <img id="previewImage" src="" alt="Anteprima Immagine" />
             <button id="removeButton" onclick="rimuoviImmagine()" style="display: none">
@@ -515,7 +514,7 @@
         </div>
         <div class="boxCaratteristica">
           <label for="inputPgRaze">Razza</label><br />
-          <input type="text" id="inputPgRaze" />
+          <input type="text" id="inputPgRace" />
         </div>
         <div class="boxCaratteristica">
           <label for="inputPgClass">Classe</label><br />
@@ -537,32 +536,32 @@
       <div class="item4">
         <div class="gridContainer_parametri">
           <div class="parametri1">
-            <label for="Attacco">Attacco</label><br />
-            <input type="number" id="Attacco" class="input-parametro" /><br />
+            <label for="InputAttacco">Attacco</label><br />
+            <input type="number" id="InputAttacco" class="input-parametro" /><br />
             <div class="bonusContainer">
               <input type="number" id="attaccoBonus1" class="input-bonus" placeholder="Bonus 1" />
               <input type="number" id="attaccoBonus2" class="input-bonus" placeholder="Bonus 2" />
             </div>
           </div>
           <div class="parametri2">
-            <label for="Mira">Mira</label><br />
-            <input type="number" id="Mira" class="input-parametro" /><br />
+            <label for="InputMira">Mira</label><br />
+            <input type="number" id="InputMira" class="input-parametro" /><br />
             <div class="bonusContainer">
               <input type="number" id="miraBonus1" class="input-bonus" placeholder="Bonus 1" />
               <input type="number" id="miraBonus2" class="input-bonus" placeholder="Bonus 2" />
             </div>
           </div>
           <div class="parametri3">
-            <label for="Resistenza">Resistenza</label><br />
-            <input type="number" id="Resistenza" class="input-parametro" /><br />
+            <label for="InputResistenza">Resistenza</label><br />
+            <input type="number" id="InputResistenza" class="input-parametro" /><br />
             <div class="bonusContainer">
               <input type="number" id="resistenzaBonus1" class="input-bonus" placeholder="Bonus 1" />
               <input type="number" id="resistenzaBonus2" class="input-bonus" placeholder="Bonus 2" />
             </div>
           </div>
           <div class="parametri4">
-            <label for="Velocita">Velocita</label><br />
-            <input type="number" id="Velocita" class="input-parametro" /><br />
+            <label for="InputVelocita">Velocita</label><br />
+            <input type="number" id="InputVelocita" class="input-parametro" /><br />
             <div class="bonusContainer">
               <input type="number" id="velocitaBonus1" class="input-bonus" placeholder="Bonus 1" />
               <input type="number" id="velocitaBonus2" class="input-bonus" placeholder="Bonus 2" />
@@ -574,99 +573,76 @@
       <div class="item5">
         <div class="BoxTratti flexInput">
           <label for="IntellettoValue">Intelletto</label><br />
-          <input type="number" id="IntellettoValue" />
+          <input type="number" id="IntellettoValue1" />
           <input type="number" id="IntellettoValue2" />
         </div>
 
         <div class="BoxTratti flexInput">
           <label for="SensiValue">Sensi</label><br />
-          <input type="number" id="SensiValue" />
+          <input type="number" id="SensiValue1" />
           <input type="number" id="SensiValue2" />
         </div>
 
         <div class="BoxTratti flexInput">
           <label for="AdattabilitaValue">Adattabilita</label><br />
-          <input type="number" id="AdattabilitaValue" />
+          <input type="number" id="AdattabilitaValue1" />
           <input type="number" id="AdattabilitaValue2" />
         </div>
 
         <div class="BoxTratti flexInput">
           <label for="IstintoValue">Istinto</label><br />
-          <input type="number" id="IstintoValue" />
+          <input type="number" id="IstintoValue1" />
           <input type="number" id="IstintoValue2" />
         </div>
 
         <div class="BoxTratti flexInput">
           <label for="FisicoValue">Fisico</label><br />
-          <input type="number" id="FisicoValue" />
+          <input type="number" id="FisicoValue1" />
           <input type="number" id="FisicoValue2" />
         </div>
 
         <div class="BoxTratti flexInput">
           <label for="RobustezzaValue">Robustezza</label><br />
-          <input type="number" id="RobustezzaValue" />
+          <input type="number" id="RobustezzaValue1" />
           <input type="number" id="RobustezzaValue2" />
         </div>
       </div>
       <div class="item6">
         <div class="BoxValore flexInput">
-          <label for="HP">Punti Vita</label><br />
-          <input type="number" id="HP" />
-          <input type="number" id="MaxHP" /><br />
-          <label for="RecuperoHP">Recupero</label>
-          <input type="number" id="RecuperoHP" />
+          <label for="InputHP">Punti Vita</label><br />
+          <input type="number" id="InputHP" />
+          <input type="number" id="InputMaxHP" /><br />
+          <label for="InputRecuperoHP">Recupero</label>
+          <input type="number" id="InputRecuperoHP" />
         </div>
         <div class="BoxValore flexInput">
-          <label for="Stamina">Stamina</label><br />
-          <input type="number" id="Stamina" />
-          <input type="number" id="StaminaMax" /><br />
-          <label for="RecuperoStamina">Recupero</label>
-          <input type="number" id="RecuperoStamina" />
+          <label for="InputStamina">Stamina</label><br />
+          <input type="number" id="InputStamina" />
+          <input type="number" id="InputStaminaMax" /><br />
+          <label for="InputRecuperoStamina">Recupero</label>
+          <input type="number" id="InputRecuperoStamina" />
         </div>
         <div class="BoxValore flexInput">
-          <label for="Nucleo_Innesto">Nucleo/Innesto</label><br />
-          <input type="number" id="Nucleo_Innesto" />
-          <input type="number" id="Nucleo_InnestoMax" /><br />
-          <label for="RecuperoNucleo_Innesto">Recupero</label>
-          <input type="number" id="RecuperoNucleo_Innesto" />
+          <label for="InputNucleo_Innesto">Nucleo/Innesto</label><br />
+          <input type="number" id="InputNucleo_Innesto" />
+          <input type="number" id="InputNucleo_InnestoMax" /><br />
+          <label for="InputRecuperoNucleo_Innesto">Recupero</label>
+          <input type="number" id="InputRecuperoNucleo_Innesto" />
         </div>
         <div class="BoxValore flexInput">
-          <label for="Contatore">Contatore</label><br />
-          <input type="text" id="Contatore" />
+          <label for="InputContatore">Contatore</label><br />
+          <input type="text" id="InputContatore" />
         </div>
       </div>
       <div class="item7 itemstretch">
-        <label for="deformazione_innescoText">Deformazione e Innesco</label><br />
-        <textarea name="deformazione_innescoText" id="deformazione_innescoText" class="ExpandText"></textarea>
+        <label for="Inputdeformazione_innescoText">Deformazione e Innesco</label><br />
+        <textarea name="deformazione_innescoText" id="Inputdeformazione_innescoText" class="ExpandText"></textarea>
       </div>
       <div class="item8 itemstretch">
         <div class="BoxTitoloElementi">
           <h3>Talenti</h3>
         </div>
         <div id="talentiContainer">
-          <div class="boxTalenti">
-            <input type="text" name="nameTalento" placeholder="nome talento" /><br />
-            <div class="talento-wrapper">
-              <textarea class="ExpandText" name="textTalento"></textarea>
-              <input type="number" class="levelTalento" placeholder="LV" />
-            </div>
-          </div>
-
-          <div class="boxTalenti">
-            <input type="text" name="nameTalento" placeholder="nome talento" /><br />
-            <div class="talento-wrapper">
-              <textarea class="ExpandText" name="textTalento"></textarea>
-              <input type="number" class="levelTalento" placeholder="LV" />
-            </div>
-          </div>
-
-          <div class="boxTalenti">
-            <input type="text" name="nameTalento" placeholder="nome talento" /><br />
-            <div class="talento-wrapper">
-              <textarea class="ExpandText" name="textTalento"></textarea>
-              <input type="number" class="levelTalento" placeholder="LV" />
-            </div>
-          </div>
         </div>
         <div class="buttonTalenti">
           <button onclick="aggiungiTalento()">Aggiungi</button>
@@ -678,20 +654,6 @@
           <tr>
             <th>Tecnica</th>
             <th>Costo</th>
-          </tr>
-          <tr>
-            <td>
-              <input type="text" placeholder="Nome tecnica" class="nomeTecnica" /><br />
-              <textarea placeholder="Descrizione tecnica" cols="50" rows="2" class="descrzioneTecnica"></textarea>
-            </td>
-            <td>
-              <div class="boxCostoTecnica_and_deleteButton">
-                <textarea placeholder="Costo tecnica" cols="20" rows="2" class="costoTecnica"></textarea>
-                <button class="deleteTecnica" onclick="rimuoviRiga(this)">
-                  X
-                </button>
-              </div>
-            </td>
           </tr>
         </table>
         <button onclick="AggiungiRiga()">Aggiungi Tecnica</button>
@@ -741,12 +703,13 @@
   </form>
 
   <script>
-    function preventEvent() {
-      console.log("ciao!");
-      if (event) event.preventDefault();
-    }
+
     // Array per memorizzare i riferimenti di tutti i talenti
     let talenti = [];
+
+    function preventEvent() {
+      if (event) event.preventDefault();
+    }
 
     // Al caricamento della pagina, aggiungi i talenti iniziali
     window.onload = function () {
@@ -781,6 +744,8 @@
       // Inserisci il nuovo boxTalenti prima del pulsante
       const buttonContainer = document.querySelector(".buttonTalenti");
       buttonContainer.before(nuovoBoxTalenti);
+
+      console.log(talenti);
     }
 
     function rimuoviTalento() {
@@ -879,6 +844,263 @@
       previewImage.style.display = "none"; // Nasconde l'anteprima
       removeButton.style.display = "none"; // Nasconde il pulsante "Rimuovi"
       fileInput.style.display = "block"; // Rende nuovamente visibile l'input file
+    }
+
+
+    // Funzione che converte un file in una stringa Base64 e restituisce una Promise
+    function convertFileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          resolve(event.target.result); // Risolve la Promise con il risultato in base64
+        };
+        reader.onerror = function () {
+          reject("Errore nella lettura del file.");
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Funzione che converte l'immagine in base64 e la salva nella scheda
+    async function img64Converter(scheda) {
+      const fileInput = document.getElementById("image");
+      const file = fileInput.files[0];
+
+      if (file) {
+        try {
+          const base64Image = await convertFileToBase64(file); // Attende il risultato
+          scheda.ImmaginePG = base64Image;
+          //console.log("Dati scheda con immagine:", JSON.stringify(scheda));
+        } catch (error) {
+          console.warn(error);
+        }
+      } else {
+        console.warn("Nessun file selezionato.");
+      }
+    }
+
+    function salvaTalenti(scheda) {
+      const talentiContainer = document.getElementById("talentiContainer").querySelectorAll(".boxTalenti");
+      talentiContainer.forEach(talento => {
+        const nome = talento.querySelector("input[name='nameTalento']").value;
+        const descrizione = talento.querySelector("textarea[name='textTalento']").value;
+        const livello = talento.querySelector("input.levelTalento").value;
+        scheda.talenti.push({ nome, descrizione, livello });
+      });
+    }
+
+    function salvaTecniche(scheda) {
+      const tecnicheRows = document.getElementById("tecnicheTable").querySelectorAll("tr");
+      tecnicheRows.forEach((row, index) => {
+        if (index === 0) return; // Salta l'intestazione
+        const nomeTecnica = row.querySelector(".nomeTecnica").value;
+        const descrizioneTecnica = row.querySelector(".descrzioneTecnica").value;
+        const costoTecnica = row.querySelector(".costoTecnica").value;
+        scheda.tecniche.push({ nomeTecnica, descrizioneTecnica, costoTecnica });
+      });
+
+    }
+
+    async function salvaDati() {
+      preventEvent();
+
+      const scheda = {
+        nomeGiocatore: document.getElementById("PlayerName").value,
+        ImmaginePG: null,
+        livelloPg: document.getElementById("PgLv").value,
+        caratteristiche: {
+          nomePg: document.getElementById("inputPgName").value,
+          razzaPg: document.getElementById("inputPgRace").value,
+          classe: document.getElementById("inputPgClass").value,
+          movimento: document.getElementById("inputMovimentoPG").value,
+          scatto: document.getElementById("inputScattoPG").value
+        },
+        parametri: {
+          attacco: document.getElementById("InputAttacco").value,
+          mira: document.getElementById("InputMira").value,
+          resistenza: document.getElementById("InputResistenza").value,
+          velocita: document.getElementById("InputVelocita").value,
+          bonusParametri: {
+            attaccoBonus1: document.getElementById("attaccoBonus1").value,
+            attaccoBonus2: document.getElementById("attaccoBonus2").value,
+            miraBonus1: document.getElementById("miraBonus1").value,
+            miraBonus2: document.getElementById("miraBonus2").value,
+            resistenzaBonus1: document.getElementById("resistenzaBonus1").value,
+            resistenzaBonus2: document.getElementById("resistenzaBonus2").value,
+            velocitaBonus1: document.getElementById("velocitaBonus1").value,
+            velocitaBonus2: document.getElementById("velocitaBonus2").value
+          }
+        },
+        tratti: {
+          intelletto: [document.getElementById("IntellettoValue1").value, document.getElementById("IntellettoValue2").value],
+          sensi: [document.getElementById("SensiValue1").value, document.getElementById("SensiValue2").value],
+          adattabilita: [document.getElementById("AdattabilitaValue1").value, document.getElementById("AdattabilitaValue2").value],
+          istinto: [document.getElementById("IstintoValue1").value, document.getElementById("IntellettoValue2").value],
+          fisico: [document.getElementById("FisicoValue1").value, document.getElementById("FisicoValue2").value],
+          robustezza: [document.getElementById("RobustezzaValue1").value, document.getElementById("RobustezzaValue2").value]
+        },
+        valori: {
+          HP: [document.getElementById("InputHP").value, document.getElementById("InputMaxHP").value],
+          stamina: [document.getElementById("InputStamina").value, document.getElementById("InputStaminaMax").value],
+          nucleoInnesto: [document.getElementById("InputNucleo_Innesto").value, document.getElementById("InputNucleo_InnestoMax").value],
+          contatore: document.getElementById("InputContatore").value,
+          recupero: {
+            recuperoHP: document.getElementById("InputRecuperoHP").value,
+            recuperoStamina: document.getElementById("InputRecuperoStamina").value,
+            recuperoNucleoInnesto: document.getElementById("InputRecuperoNucleo_Innesto").value
+          }
+        },
+        talenti: [],
+        tecniche: [],
+        inventario: document.getElementById("inventarioText").value,
+        note: document.getElementById("noteText").value,
+        background: document.getElementById("backgroundText").value,
+        descrizione: document.getElementById("descrzioneText").value,
+        personalita: document.getElementById("personalitaText").value,
+        obiettivi: document.getElementById("obbiettiviText").value,
+      };
+
+      await img64Converter(scheda);
+      salvaTalenti(scheda);
+      salvaTecniche(scheda);
+
+      const datiJson = JSON.stringify(scheda, null, 2);
+      console.log(datiJson);
+
+      // Crea un Blob (un file temporaneo) contenente i dati JSON
+      const blob = new Blob([datiJson], { type: "application/json" });
+
+      // Crea un link per il download
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `schedaPG.json`; // Nome del file di default
+
+      // Simula un click per avviare il download
+      link.click();
+
+      // Libera la memoria usata dal Blob temporaneo
+      URL.revokeObjectURL(link.href);
+
+    }
+
+
+    function caricaTalenti(dati) {
+      const talentiContainer = document.getElementById("talentiContainer");
+      dati.talenti.forEach(talento => {
+        const nuovoBoxTalenti = document.createElement("div");
+        nuovoBoxTalenti.className = "boxTalenti";
+        nuovoBoxTalenti.innerHTML = `
+        <input type="text" name="nameTalento" value="${talento.nome}" placeholder="nome talento"/><br>
+        <div class="talento-wrapper">
+          <textarea class="ExpandText" name="textTalento">${talento.descrizione}</textarea>
+          <input type="number" class="levelTalento" placeholder="LV" value="${talento.livello}">
+        </div>`;
+        talentiContainer.appendChild(nuovoBoxTalenti);
+      });
+    }
+
+
+    function caricaTecniche(dati) {
+      const tecnicheTable = document.getElementById("tecnicheTable");
+      dati.tecniche.forEach(tecnica => {
+        const newRow = tecnicheTable.insertRow();
+        newRow.innerHTML = `
+        <td>
+          <input type="text" placeholder="Nome tecnica" class="nomeTecnica" value="${tecnica.nomeTecnica}"><br>
+          <textarea placeholder="Descrizione tecnica" cols="50" rows="2" class="descrzioneTecnica">${tecnica.descrizioneTecnica}</textarea>
+        </td>
+        <td>
+          <div class="boxCostoTecnica_and_deleteButton">
+            <textarea placeholder="Costo tecnica" cols="20" rows="2" class="costoTecnica">${tecnica.costoTecnica}</textarea>
+            <button class="deleteTecnica" onclick="rimuoviRiga(this)">X</button>
+          </div>
+        </td>`;
+      });
+    }
+
+
+    function caricaDati() {
+      const fileInput = document.getElementById("fileInput");
+      const file = fileInput.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+          try {
+            const datiCaricati = JSON.parse(event.target.result); // Converte il JSON in oggetto
+            caricaSchedaJson(datiCaricati); // Chiama la funzione per aggiornare la pagina con i dati
+          } catch (error) {
+            console.error("Errore nella lettura del file JSON:", error);
+            alert("Errore nel file JSON. Verifica il formato.");
+          }
+        };
+
+        reader.readAsText(file);
+      }
+    }
+
+    function caricaSchedaJson(dati) {
+      //dati del player
+      document.getElementById("PlayerName").value = dati.nomeGiocatore;
+      document.getElementById("PgLv").value = dati.livelloPg;
+      //dati del pg
+      document.getElementById("inputPgName").value = dati.nomePersonaggio;
+      document.getElementById("inputPgRace").value = dati.razza;
+      document.getElementById("inputPgClass").value = dati.classe;
+      document.getElementById("inputMovimentoPG").value = dati.movimento;
+      document.getElementById("inputScattoPG").value = dati.scatto;
+
+      document.getElementById("InputAttacco").value = dati.parametri.attacco;
+      document.getElementById("InputMira").value = dati.parametri.mira;
+      document.getElementById("InputResistenza").value = dati.parametri.resistenza;
+      document.getElementById("InputVelocita").value = dati.parametri.velocita;
+
+      document.getElementById("attaccoBonus1").value = dati.parametri.bonus.attaccoBonus1;
+      document.getElementById("attaccoBonus2").value = dati.parametri.bonus.attaccoBonus2;
+      document.getElementById("miraBonus1").value = dati.parametri.bonus.miraBonus1;
+      document.getElementById("miraBonus2").value = dati.parametri.bonus.miraBonus2;
+      document.getElementById("resistenzaBonus1").value = dati.parametri.bonus.resistenzaBonus1;
+      document.getElementById("resistenzaBonus2").value = dati.parametri.bonus.resistenzaBonus2;
+      document.getElementById("velocitaBonus1").value = dati.parametri.bonus.velocitaBonus1;
+      document.getElementById("velocitaBonus2").value = dati.parametri.bonus.velocitaBonus2;
+
+      document.getElementById("IntellettoValue1").value = dati.tratti.intelletto[0];
+      document.getElementById("IntellettoValue2").value = dati.tratti.intelletto[1];
+      document.getElementById("SensiValue1").value = dati.tratti.sensi[0];
+      document.getElementById("SensiValue2").value = dati.tratti.sensi[1];
+      document.getElementById("AdattabilitaValue1").value = dati.tratti.adattabilita[0];
+      document.getElementById("AdattabilitaValue2").value = dati.tratti.adattabilita[1];
+      document.getElementById("IstintoValue1").value = dati.tratti.istinto[0];
+      document.getElementById("IstintoValue2").value = dati.tratti.istinto[1];
+      document.getElementById("FisicoValue1").value = dati.tratti.fisico[0];
+      document.getElementById("FisicoValue2").value = dati.tratti.fisico[1];
+      document.getElementById("RobustezzaValue1").value = dati.tratti.robustezza[0];
+      document.getElementById("RobustezzaValue2").value = dati.tratti.robustezza[1];
+
+      document.getElementById("InputHP").value = dati.valori.HP[0];
+      document.getElementById("InputMaxHP").valu = dati.valori.HP[1];
+      document.getElementById("InputStamina").value = dati.valori.stamina[0];
+      document.getElementById("InputStaminaMax").value = dati.valori.stamina[1];
+      document.getElementById("InputNucleo_Innesto").value = dati.valori.nucleoInnesto[0];
+      document.getElementById("InputNucleo_InnestoMax").value = dati.valori.nucleoInnesto[1];
+      document.getElementById("InputContatore").value = dati.valori.contatore;
+      document.getElementById("InputRecuperoHP").value = dati.valori.recupero.recuperoHP;
+      document.getElementById("InputRecuperoStamina").valu = dati.valori.recupero.recuperoStamina;
+      document.getElementById("InputRecuperoNucleo_Innesto").value = dati.valori.recupero.recuperoNucleoInnesto;
+
+
+      document.getElementById("inventarioText").value = dati.inventario;
+      document.getElementById("noteText").value = dati.note;
+      document.getElementById("backgroundText").value = dati.background;
+      document.getElementById("descrzioneText").value = dati.descrizione;
+      document.getElementById("personalitaText").value = dati.personalita;
+      document.getElementById("obbiettiviText").value = dati.obiettivi;
+
+      caricaTalenti(dati);
+      caricaTecniche(dati);
+
+
     }
 
 
