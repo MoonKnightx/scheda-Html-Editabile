@@ -1,856 +1,784 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Expired</title>
-    <style>
-      input::-webkit-outer-spin-button,
-      input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-
-      /* Per Firefox */
-      input[type="number"] {
-        -moz-appearance: textfield;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      .item1 {
-        grid-area: header;
-      }
-
-      .item2 {
-        grid-area: img;
-      }
-
-      .item3 {
-        grid-area: caratteristiche;
-      }
-
-      .item4 {
-        grid-area: parametri;
-      }
-
-      .item5 {
-        grid-area: tratti;
-      }
-
-      .item6 {
-        grid-area: valori;
-      }
-
-      .item7 {
-        grid-area: deformazione_innesco;
-      }
-
-      .item8 {
-        grid-area: talenti;
-      }
-
-      .item9 {
-        grid-area: tecniche;
-      }
-
-      .item10 {
-        grid-area: invetario;
-      }
-
-      .item11 {
-        grid-area: note;
-      }
-
-      .item12 {
-        grid-area: background;
-      }
-
-      .item13 {
-        grid-area: descrzione;
-      }
-
-      .item14 {
-        grid-area: personalita;
-      }
-
-      .item15 {
-        grid-area: obbiettivi;
-      }
-
-      .item16 {
-        grid-area: footer;
-      }
-
-      .grind_container {
-        display: grid;
-        gap: 10px;
-        background-color: #2196f3;
-        padding: 10px;
-
-        /* Definizione delle dimensioni delle colonne e righe */
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        /* 4 colonne di larghezza uguale */
-        grid-template-rows: auto auto auto auto auto auto auto auto;
-        /* Altezza delle righe automatica */
-
-        grid-template-areas:
-          "header header header header"
-          "img caratteristiche parametri parametri"
-          "img caratteristiche parametri parametri"
-          "img caratteristiche parametri parametri"
-          "valori valori valori valori"
-          "tratti tratti tratti tratti"
-          "deformazione_innesco deformazione_innesco talenti talenti"
-          "tecniche tecniche tecniche tecniche"
-          "invetario invetario note note"
-          "descrzione descrzione background background"
-          "personalita personalita obbiettivi obbiettivi"
-          "footer footer footer footer";
-      }
-
-      .grind_container > div {
-        background-color: rgba(255, 255, 255, 0.8);
-        /* text-align: center; */
-        padding: 0;
-        font-size: 25px;
-      }
-
-      /* Espansione dell'immagine su più righe */
-      .item2 {
-        grid-row: span 3;
-      }
-
-      .parametri1 {
-        grid-area: parametri1;
-      }
-
-      .parametri2 {
-        grid-area: parametri2;
-      }
-
-      .parametri3 {
-        grid-area: parametri3;
-      }
-
-      .parametri4 {
-        grid-area: parametri4;
-      }
-
-      .item4 {
-        display: flex;
-        justify-content: center;
-        /* Centra orizzontalmente .gridContainer_parametri */
-        align-items: center;
-        /* Centra verticalmente .gridContainer_parametri */
-        height: 100%;
-        /* Assicura che .item4 occupi l'intera altezza disponibile */
-        width: 100%;
-        /* Assicura che .item4 occupi l'intera larghezza */
-      }
-
-      .gridContainer_parametri {
-        display: grid;
-        gap: 10px;
-        background-color: red;
-        padding: 10px;
-        width: 100%;
-        /* Occupa tutta la larghezza di .item4 */
-        height: 100%;
-        /* Occupa tutta l'altezza di .item4 */
-
-        grid-template-columns: 1fr 1fr;
-        /* Due colonne di uguale larghezza */
-        grid-template-rows: auto auto;
-        /* Due righe di altezza automatica */
-        grid-template-areas:
-          "parametri1 parametri2"
-          "parametri3 parametri4";
-      }
-
-      .gridContainer_parametri > div {
-        background-color: pink;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        font-size: 20px;
-        width: 100%;
-        /* Assicura che ogni cella occupi tutta la larghezza */
-        height: 100%;
-        /* Assicura che ogni cella occupi tutta l'altezza */
-        box-sizing: border-box;
-        /* Include padding nella dimensione */
-      }
-
-      .parametri1,
-      .parametri2,
-      .parametri3,
-      .parametri4 {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .input-parametro {
-        /* Riduce la larghezza del campo principale */
-        font-size: 1rem;
-        text-align: center;
-        width: 80%;
-        /* Ingrandisce la larghezza dell'input principale */
-        height: 40px;
-        /* Aumenta l'altezza */
-        font-size: 1.8rem;
-        /* Aumenta la dimensione del font */
-      }
-
-      .bonusContainer {
-        display: flex;
-        justify-content: space-between;
-        /* Spazia i due input bonus */
-        width: 60%;
-        /* Stessa larghezza del campo principale */
-        margin-top: 5px;
-        /* Spazio tra input principale e bonus */
-      }
-
-      .input-bonus {
-        width: 50%;
-        height: 40px;
-        /* Aumenta l'altezza */
-        /* Ogni bonus occupa metà dello spazio della bonusContainer */
-        font-size: 1.3rem;
-        text-align: center;
-      }
-
-      .parametri1 > label,
-      .parametri2 > label,
-      .parametri3 > label,
-      .parametri4 > label {
-        font-size: 2.1rem;
-      }
-
-      .item6,
-      .item5 {
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-      }
-
-      .BoxValore,
-      .BoxTratti {
-        flex: 1;
-        background-color: #f9f9f9;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-
-      .BoxValore input,
-      .BoxTratti input {
-        width: 100px;
-        margin: 5px 0;
-      }
-
-      .BoxValore #Contatore {
-        width: 65%;
-      }
-
-      /* Flex per i campi di movimento e scatto */
-      .flexInputContainer {
-        display: flex;
-        gap: 10px;
-      }
-
-      .flexInputContainer input {
-        flex: 1;
-      }
-
-      /* Per la disposizione verticale */
-      .boxCaratteristica {
-        margin-bottom: 10px;
-      }
-
-      /* Per i campi con input affiancati */
-      .flexInputs {
-        display: flex;
-        gap: 10px;
-      }
-
-      .boxScatto input,
-      .boxMovimento input {
-        width: 250px;
-      }
-
-      .boxTalenti {
-        margin-bottom: 20px;
-      }
-
-      .talento-wrapper {
-        display: flex;
-        /* Flexbox per allineare gli elementi in orizzontale */
-        align-items: top;
-        /* Centra l'input number verticalmente */
-      }
-
-      .levelTalento {
-        width: 50px;
-        /* Imposta la larghezza del campo numerico */
-        height: 80px;
-        text-align: center;
-        /* Centra il numero nel campo */
-        padding: 8px;
-        /* Aggiunge padding per migliorare l'allineamento verticale */
-        border: 1px solid #ccc;
-      }
-
-      .item8 {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .buttonTalenti {
-        text-align: center;
-        margin-top: auto;
-      }
-
-      .BoxTitoloElementi {
-        background-color: #000;
-        color: #fff;
-        text-align: center;
-        padding: 5px;
-        margin-bottom: 15px;
-      }
-
-      .item9 {
-        width: 100%;
-        text-align: center;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-
-      th,
-      td {
-        border: 3px solid black;
-      }
-
-      .nomeTecnica,
-      .descrzioneTecnica,
-      .costoTecnica {
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      .costoTecnica {
-        height: 122px;
-      }
-
-      th {
-        background-color: #f4f4f4;
-        font-weight: bold;
-      }
-
-      .deleteTecnica {
-        width: 30px;
-        color: red;
-      }
-
-      .boxCostoTecnica_and_deleteButton {
-        display: flex;
-        align-items: stretch;
-      }
-
-      .itemstretch {
-        display: flex;
-        flex-direction: column;
-        /* Dispone gli elementi in colonna */
-        height: 100%;
-        /* Occupa tutta l'altezza disponibile */
-      }
-
-      .Boxexpand {
-        flex-grow: 1;
-        /* Permette a .personalitaBox di espandersi */
-        height: 100%;
-        /* Assicura che .personalitaBox occupi l'intero spazio */
-      }
-
-      .ExpandText {
-        width: 100%;
-        /* Occupa tutta la larghezza */
-        height: 100%;
-        /* Occupa tutta l'altezza */
-        box-sizing: border-box;
-        /* Include padding e bordo nella dimensione */
-      }
-
-      .imgBox {
-        text-align: center;
-        margin-top: 10px;
-      }
-
-      #previewContainer {
-        position: relative;
-        display: inline-block;
-        width: 300px;
-        /* Larghezza fissa del contenitore */
-        height: 300px;
-        /* Altezza fissa del contenitore */
-        border-radius: 5px;
-        overflow: hidden;
-        /* Bordo arrotondato visibile */
-      }
-
-      #previewImage {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        /* Mantiene l'immagine interamente visibile nel contenitore */
-        display: block;
-        border-radius: 5px;
-      }
-
-      /* Pulsante di rimozione */
-      #removeButton {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        background: rgba(0, 0, 0, 0.5);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        /* Rende il pulsante circolare */
-        cursor: pointer;
-        font-size: 16px;
-        width: 30px;
-        height: 30px;
-        /* Imposta altezza e larghezza uguali per forma circolare */
-        display: none;
-        text-align: center;
-        line-height: 30px;
-        /* Centra il testo verticalmente */
-        padding: 0;
-        /* Rimuove padding extra */
-      }
-
-      #removeButton:hover {
-        background: rgba(0, 0, 0, 0.7);
-      }
-
-      .levelContainer {
-        margin-bottom: 10px;
-      }
-
-      .levelInput {
-        width: 50px;
-        height: 50px;
-        text-align: center;
-        border-radius: 50%;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-        font-size: 18px;
-      }
-
-      .item1 {
-        display: flex;
-        justify-content: space-between;
-        /* Spinge playerNameBox a sinistra e loadAndSaveBox a destra */
-        align-items: center;
-        /* Allinea gli elementi verticalmente al centro */
-        gap: 10px;
-      }
-
-      .loadAndSaveBox {
-        display: flex;
-        /* Dispone i pulsanti sulla stessa linea */
-        gap: 10px;
-        /* Spazio tra i pulsanti */
-      }
-    </style>
-  </head>
-
-  <body>
-    <form action="" onsubmit="return false;">
-      <div class="grind_container">
-        <div class="item1">
-          <div class="playerNameBox">
-            <input type="text" placeholder="nome giocatore" id="PlayerName" />
-          </div>
-          <div class="loadAndSaveBox">
-            <input
-              type="file"
-              id="fileInput"
-              accept=".json"
-              onchange="caricaDati()"
-              style="display: none"
-            />
-            <button onclick="document.getElementById('fileInput').click()">
-              Carica
+
+<head>
+  <meta charset="UTF-8" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Expired</title>
+  <style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Per Firefox */
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .item1 {
+      grid-area: header;
+    }
+
+    .item2 {
+      grid-area: img;
+    }
+
+    .item3 {
+      grid-area: caratteristiche;
+    }
+
+    .item4 {
+      grid-area: parametri;
+    }
+
+    .item5 {
+      grid-area: tratti;
+    }
+
+    .item6 {
+      grid-area: valori;
+    }
+
+    .item7 {
+      grid-area: deformazione_innesco;
+    }
+
+    .item8 {
+      grid-area: talenti;
+    }
+
+    .item9 {
+      grid-area: tecniche;
+    }
+
+    .item10 {
+      grid-area: invetario;
+    }
+
+    .item11 {
+      grid-area: note;
+    }
+
+    .item12 {
+      grid-area: background;
+    }
+
+    .item13 {
+      grid-area: descrzione;
+    }
+
+    .item14 {
+      grid-area: personalita;
+    }
+
+    .item15 {
+      grid-area: obbiettivi;
+    }
+
+    .item16 {
+      grid-area: footer;
+    }
+
+    .grind_container {
+      display: grid;
+      gap: 10px;
+      background-color: #2196f3;
+      padding: 10px;
+
+      /* Definizione delle dimensioni delle colonne e righe */
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      /* 4 colonne di larghezza uguale */
+      grid-template-rows: auto auto auto auto auto auto auto auto;
+      /* Altezza delle righe automatica */
+
+      grid-template-areas:
+        "header header header header"
+        "img caratteristiche parametri parametri"
+        "img caratteristiche parametri parametri"
+        "img caratteristiche parametri parametri"
+        "valori valori valori valori"
+        "tratti tratti tratti tratti"
+        "deformazione_innesco deformazione_innesco talenti talenti"
+        "tecniche tecniche tecniche tecniche"
+        "invetario invetario note note"
+        "descrzione descrzione background background"
+        "personalita personalita obbiettivi obbiettivi"
+        "footer footer footer footer";
+    }
+
+    .grind_container>div {
+      background-color: rgba(255, 255, 255, 0.8);
+      /* text-align: center; */
+      padding: 0;
+      font-size: 25px;
+    }
+
+    /* Espansione dell'immagine su più righe */
+    .item2 {
+      grid-row: span 3;
+    }
+
+    .parametri1 {
+      grid-area: parametri1;
+    }
+
+    .parametri2 {
+      grid-area: parametri2;
+    }
+
+    .parametri3 {
+      grid-area: parametri3;
+    }
+
+    .parametri4 {
+      grid-area: parametri4;
+    }
+
+    .item4 {
+      display: flex;
+      justify-content: center;
+      /* Centra orizzontalmente .gridContainer_parametri */
+      align-items: center;
+      /* Centra verticalmente .gridContainer_parametri */
+      height: 100%;
+      /* Assicura che .item4 occupi l'intera altezza disponibile */
+      width: 100%;
+      /* Assicura che .item4 occupi l'intera larghezza */
+    }
+
+    .gridContainer_parametri {
+      display: grid;
+      gap: 10px;
+      background-color: red;
+      padding: 10px;
+      width: 100%;
+      /* Occupa tutta la larghezza di .item4 */
+      height: 100%;
+      /* Occupa tutta l'altezza di .item4 */
+
+      grid-template-columns: 1fr 1fr;
+      /* Due colonne di uguale larghezza */
+      grid-template-rows: auto auto;
+      /* Due righe di altezza automatica */
+      grid-template-areas:
+        "parametri1 parametri2"
+        "parametri3 parametri4";
+    }
+
+    .gridContainer_parametri>div {
+      background-color: pink;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-size: 20px;
+      width: 100%;
+      /* Assicura che ogni cella occupi tutta la larghezza */
+      height: 100%;
+      /* Assicura che ogni cella occupi tutta l'altezza */
+      box-sizing: border-box;
+      /* Include padding nella dimensione */
+    }
+
+    .parametri1,
+    .parametri2,
+    .parametri3,
+    .parametri4 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .input-parametro {
+      /* Riduce la larghezza del campo principale */
+      font-size: 1rem;
+      text-align: center;
+      width: 80%;
+      /* Ingrandisce la larghezza dell'input principale */
+      height: 40px;
+      /* Aumenta l'altezza */
+      font-size: 1.8rem;
+      /* Aumenta la dimensione del font */
+    }
+
+    .bonusContainer {
+      display: flex;
+      justify-content: space-between;
+      /* Spazia i due input bonus */
+      width: 60%;
+      /* Stessa larghezza del campo principale */
+      margin-top: 5px;
+      /* Spazio tra input principale e bonus */
+    }
+
+    .input-bonus {
+      width: 50%;
+      height: 40px;
+      /* Aumenta l'altezza */
+      /* Ogni bonus occupa metà dello spazio della bonusContainer */
+      font-size: 1.3rem;
+      text-align: center;
+    }
+
+    .parametri1>label,
+    .parametri2>label,
+    .parametri3>label,
+    .parametri4>label {
+      font-size: 2.1rem;
+    }
+
+    .item6,
+    .item5 {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .BoxValore,
+    .BoxTratti {
+      flex: 1;
+      background-color: #f9f9f9;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .BoxValore input,
+    .BoxTratti input {
+      width: 100px;
+      margin: 5px 0;
+    }
+
+    .BoxValore #Contatore {
+      width: 65%;
+    }
+
+    /* Flex per i campi di movimento e scatto */
+    .flexInputContainer {
+      display: flex;
+      gap: 10px;
+    }
+
+    .flexInputContainer input {
+      flex: 1;
+    }
+
+    /* Per la disposizione verticale */
+    .boxCaratteristica {
+      margin-bottom: 10px;
+    }
+
+    /* Per i campi con input affiancati */
+    .flexInputs {
+      display: flex;
+      gap: 10px;
+    }
+
+    .boxScatto input,
+    .boxMovimento input {
+      width: 250px;
+    }
+
+    .boxTalenti {
+      margin-bottom: 20px;
+    }
+
+    .talento-wrapper {
+      display: flex;
+      /* Flexbox per allineare gli elementi in orizzontale */
+      align-items: top;
+      /* Centra l'input number verticalmente */
+    }
+
+    .levelTalento {
+      width: 50px;
+      /* Imposta la larghezza del campo numerico */
+      height: 80px;
+      text-align: center;
+      /* Centra il numero nel campo */
+      padding: 8px;
+      /* Aggiunge padding per migliorare l'allineamento verticale */
+      border: 1px solid #ccc;
+    }
+
+    .item8 {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .buttonTalenti {
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .BoxTitoloElementi {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 5px;
+      margin-bottom: 15px;
+    }
+
+    .item9 {
+      width: 100%;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 3px solid black;
+    }
+
+    .nomeTecnica,
+    .descrzioneTecnica,
+    .costoTecnica {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .costoTecnica {
+      height: 122px;
+    }
+
+    th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+
+    .deleteTecnica {
+      width: 30px;
+      color: red;
+    }
+
+    .boxCostoTecnica_and_deleteButton {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .itemstretch {
+      display: flex;
+      flex-direction: column;
+      /* Dispone gli elementi in colonna */
+      height: 100%;
+      /* Occupa tutta l'altezza disponibile */
+    }
+
+    .Boxexpand {
+      flex-grow: 1;
+      /* Permette a .personalitaBox di espandersi */
+      height: 100%;
+      /* Assicura che .personalitaBox occupi l'intero spazio */
+    }
+
+    .ExpandText {
+      width: 100%;
+      /* Occupa tutta la larghezza */
+      height: 100%;
+      /* Occupa tutta l'altezza */
+      box-sizing: border-box;
+      /* Include padding e bordo nella dimensione */
+    }
+
+    .imgBox {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    #previewContainer {
+      position: relative;
+      display: inline-block;
+      width: 300px;
+      /* Larghezza fissa del contenitore */
+      height: 300px;
+      /* Altezza fissa del contenitore */
+      border-radius: 5px;
+      overflow: hidden;
+      /* Bordo arrotondato visibile */
+    }
+
+    #previewImage {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      /* Mantiene l'immagine interamente visibile nel contenitore */
+      display: block;
+      border-radius: 5px;
+    }
+
+    /* Pulsante di rimozione */
+    #removeButton {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      /* Rende il pulsante circolare */
+      cursor: pointer;
+      font-size: 16px;
+      width: 30px;
+      height: 30px;
+      /* Imposta altezza e larghezza uguali per forma circolare */
+      display: none;
+      text-align: center;
+      line-height: 30px;
+      /* Centra il testo verticalmente */
+      padding: 0;
+      /* Rimuove padding extra */
+    }
+
+    #removeButton:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .levelContainer {
+      margin-bottom: 10px;
+    }
+
+    .levelInput {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 18px;
+    }
+
+    .item1 {
+      display: flex;
+      justify-content: space-between;
+      /* Spinge playerNameBox a sinistra e loadAndSaveBox a destra */
+      align-items: center;
+      /* Allinea gli elementi verticalmente al centro */
+      gap: 10px;
+    }
+
+    .loadAndSaveBox {
+      display: flex;
+      /* Dispone i pulsanti sulla stessa linea */
+      gap: 10px;
+      /* Spazio tra i pulsanti */
+    }
+  </style>
+</head>
+
+<body>
+  <form action="" onsubmit="return false;">
+    <div class="grind_container">
+      <div class="item1">
+        <div class="playerNameBox">
+          <input type="text" placeholder="nome giocatore" id="PlayerName" />
+        </div>
+        <div class="loadAndSaveBox">
+          <input type="file" id="fileInput" accept=".json" onchange="caricaDati()" style="display: none" />
+          <button onclick="document.getElementById('fileInput').click()">
+            Carica
+          </button>
+          <button onclick="salvaDati()">Salva</button>
+        </div>
+      </div>
+      <div class="item2">
+        <div class="imgBox">
+          <input type="file" name="image" id="image" accept="image/*" onchange="caricaImmagine(event)" />
+          <div id="previewContainer">
+            <img id="previewImage" src="" alt="Anteprima Immagine" />
+            <button id="removeButton" onclick="rimuoviImmagine()" style="display: none">
+              ✕
             </button>
-            <button onclick="salvaDati()">Salva</button>
           </div>
-        </div>
-        <div class="item2">
-          <div class="imgBox">
-            <input
-              type="file"
-              name="image"
-              id="image"
-              accept="image/*"
-              onchange="caricaImmagine(event)"
-            />
-            <div id="previewContainer">
-              <img id="previewImage" src="" alt="Anteprima Immagine" />
-              <button
-                id="removeButton"
-                onclick="rimuoviImmagine()"
-                style="display: none"
-              >
-                ✕
-              </button>
-            </div>
-            <div class="levelContainer">
-              <input
-                type="number"
-                placeholder="LV"
-                class="levelInput"
-                id="PgLv"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="item3">
-          <div class="boxCaratteristica">
-            <label for="inputPgName">Nome Personaggio</label><br />
-            <input type="text" id="inputPgName" />
-          </div>
-          <div class="boxCaratteristica">
-            <label for="inputPgRaze">Razza</label><br />
-            <input type="text" id="inputPgRace" />
-          </div>
-          <div class="boxCaratteristica">
-            <label for="inputPgClass">Classe</label><br />
-            <input type="text" id="inputPgClass" />
-          </div>
-          <div class="boxCaratteristica">
-            <div class="flexInputContainer">
-              <div class="boxMovimento">
-                <label for="inputMovimentoPG">Movimento</label>
-                <input type="text" id="inputMovimentoPG" />
-              </div>
-              <div class="boxScatto">
-                <label for="inputScattoPG">Scatto</label><br />
-                <input type="text" id="inputScattoPG" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item4">
-          <div class="gridContainer_parametri">
-            <div class="parametri1">
-              <label for="InputAttacco">Attacco</label><br />
-              <input
-                type="number"
-                id="InputAttacco"
-                class="input-parametro"
-              /><br />
-              <div class="bonusContainer">
-                <input
-                  type="number"
-                  id="attaccoBonus1"
-                  class="input-bonus"
-                  placeholder="Bonus 1"
-                />
-                <input
-                  type="number"
-                  id="attaccoBonus2"
-                  class="input-bonus"
-                  placeholder="Bonus 2"
-                />
-              </div>
-            </div>
-            <div class="parametri2">
-              <label for="InputMira">Mira</label><br />
-              <input
-                type="number"
-                id="InputMira"
-                class="input-parametro"
-              /><br />
-              <div class="bonusContainer">
-                <input
-                  type="number"
-                  id="miraBonus1"
-                  class="input-bonus"
-                  placeholder="Bonus 1"
-                />
-                <input
-                  type="number"
-                  id="miraBonus2"
-                  class="input-bonus"
-                  placeholder="Bonus 2"
-                />
-              </div>
-            </div>
-            <div class="parametri3">
-              <label for="InputResistenza">Resistenza</label><br />
-              <input
-                type="number"
-                id="InputResistenza"
-                class="input-parametro"
-              /><br />
-              <div class="bonusContainer">
-                <input
-                  type="number"
-                  id="resistenzaBonus1"
-                  class="input-bonus"
-                  placeholder="Bonus 1"
-                />
-                <input
-                  type="number"
-                  id="resistenzaBonus2"
-                  class="input-bonus"
-                  placeholder="Bonus 2"
-                />
-              </div>
-            </div>
-            <div class="parametri4">
-              <label for="InputVelocita">Velocita</label><br />
-              <input
-                type="number"
-                id="InputVelocita"
-                class="input-parametro"
-              /><br />
-              <div class="bonusContainer">
-                <input
-                  type="number"
-                  id="velocitaBonus1"
-                  class="input-bonus"
-                  placeholder="Bonus 1"
-                />
-                <input
-                  type="number"
-                  id="velocitaBonus2"
-                  class="input-bonus"
-                  placeholder="Bonus 2"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="item5">
-          <div class="BoxTratti flexInput">
-            <label for="IntellettoValue">Intelletto</label><br />
-            <input type="number" id="IntellettoValue1" />
-            <input type="number" id="IntellettoValue2" />
-          </div>
-
-          <div class="BoxTratti flexInput">
-            <label for="SensiValue">Sensi</label><br />
-            <input type="number" id="SensiValue1" />
-            <input type="number" id="SensiValue2" />
-          </div>
-
-          <div class="BoxTratti flexInput">
-            <label for="AdattabilitaValue">Adattabilita</label><br />
-            <input type="number" id="AdattabilitaValue1" />
-            <input type="number" id="AdattabilitaValue2" />
-          </div>
-
-          <div class="BoxTratti flexInput">
-            <label for="IstintoValue">Istinto</label><br />
-            <input type="number" id="IstintoValue1" />
-            <input type="number" id="IstintoValue2" />
-          </div>
-
-          <div class="BoxTratti flexInput">
-            <label for="FisicoValue">Fisico</label><br />
-            <input type="number" id="FisicoValue1" />
-            <input type="number" id="FisicoValue2" />
-          </div>
-
-          <div class="BoxTratti flexInput">
-            <label for="RobustezzaValue">Robustezza</label><br />
-            <input type="number" id="RobustezzaValue1" />
-            <input type="number" id="RobustezzaValue2" />
-          </div>
-        </div>
-        <div class="item6">
-          <div class="BoxValore flexInput">
-            <label for="InputHP">Punti Vita</label><br />
-            <input type="number" id="InputHP" />
-            <input type="number" id="InputMaxHP" /><br />
-            <label for="InputRecuperoHP">Recupero</label>
-            <input type="number" id="InputRecuperoHP" />
-          </div>
-          <div class="BoxValore flexInput">
-            <label for="InputStamina">Stamina</label><br />
-            <input type="number" id="InputStamina" />
-            <input type="number" id="InputStaminaMax" /><br />
-            <label for="InputRecuperoStamina">Recupero</label>
-            <input type="number" id="InputRecuperoStamina" />
-          </div>
-          <div class="BoxValore flexInput">
-            <label for="InputNucleo_Innesto">Nucleo/Innesto</label><br />
-            <input type="number" id="InputNucleo_Innesto" />
-            <input type="number" id="InputNucleo_InnestoMax" /><br />
-            <label for="InputRecuperoNucleo_Innesto">Recupero</label>
-            <input type="number" id="InputRecuperoNucleo_Innesto" />
-          </div>
-          <div class="BoxValore flexInput">
-            <label for="InputContatore">Contatore</label><br />
-            <input type="text" id="InputContatore" />
-          </div>
-        </div>
-        <div class="item7 itemstretch">
-          <label for="Inputdeformazione_innescoText"
-            >Deformazione e Innesco</label
-          ><br />
-          <textarea
-            name="deformazione_innescoText"
-            id="Inputdeformazione_innescoText"
-            class="ExpandText"
-          ></textarea>
-        </div>
-        <div class="item8 itemstretch">
-          <div class="BoxTitoloElementi">
-            <h3>Talenti</h3>
-          </div>
-          <div id="talentiContainer"></div>
-          <div class="buttonTalenti">
-            <button onclick="aggiungiTalento()">Aggiungi</button>
-            <button onclick="rimuoviTalento()">Rimuovi</button>
-          </div>
-        </div>
-        <div class="item9">
-          <table id="tecnicheTable">
-            <tr>
-              <th>Tecnica</th>
-              <th>Costo</th>
-            </tr>
-          </table>
-          <button onclick="AggiungiRiga()">Aggiungi Tecnica</button>
-        </div>
-        <div class="item10 itemstretch">
-          inventario
-          <div class="invantarioBox Boxexpand">
-            <textarea
-              class="ExpandText"
-              id="inventarioText"
-              name="inventarioText"
-              id=""
-              cols="30"
-              rows="10"
-            ></textarea>
-          </div>
-        </div>
-        <div class="item11 itemstretch">
-          note
-          <div class="noteBox Boxexpand">
-            <textarea
-              class="ExpandText"
-              id="noteText"
-              name="noteText"
-              id=""
-              cols="30"
-              rows="10"
-            ></textarea>
-          </div>
-        </div>
-        <div class="item12 itemstretch">
-          Background
-          <div class="backgroundBox Boxexpand">
-            <textarea
-              class="ExpandText"
-              id="backgroundText"
-              name="backgroundText"
-              id=""
-              cols="30"
-              rows="10"
-            ></textarea>
-          </div>
-        </div>
-        <div class="item13 itemstretch">
-          Descrzione
-          <div class="descrzioneBox Boxexpand">
-            <textarea
-              class="ExpandText"
-              id="descrzioneText"
-              name="descrzioneText"
-              id=""
-              cols="30"
-              rows="10"
-            ></textarea>
-          </div>
-        </div>
-        <div class="item14 itemstretch">
-          Personalita
-          <div class="personalitaBox Boxexpand">
-            <textarea
-              class="ExpandText"
-              id="personalitaText"
-              name="personalitaText"
-              id=""
-              cols="30"
-              rows="10"
-            ></textarea>
-          </div>
-        </div>
-        <div class="item15 itemstretch">
-          Obbiettivi
-          <div class="obbiettiviBox Boxexpand">
-            <textarea
-              class="ExpandText"
-              id="obbiettiviText"
-              name="obbiettiviText"
-              id=""
-              cols="30"
-              rows="10"
-            ></textarea>
-          </div>
-        </div>
-        <div class="item16">
-          <div class="footerText">
-            <p>Scheda creata da Simone Siepi</p>
+          <div class="levelContainer">
+            <input type="number" placeholder="LV" class="levelInput" id="PgLv" />
           </div>
         </div>
       </div>
-    </form>
+      <div class="item3">
+        <div class="boxCaratteristica">
+          <label for="inputPgName">Nome Personaggio</label><br />
+          <input type="text" id="inputPgName" />
+        </div>
+        <div class="boxCaratteristica">
+          <label for="inputPgRaze">Razza</label><br />
+          <input type="text" id="inputPgRace" />
+        </div>
+        <div class="boxCaratteristica">
+          <label for="inputPgClass">Classe</label><br />
+          <input type="text" id="inputPgClass" />
+        </div>
+        <div class="boxCaratteristica">
+          <div class="flexInputContainer">
+            <div class="boxMovimento">
+              <label for="inputMovimentoPG">Movimento</label>
+              <input type="text" id="inputMovimentoPG" />
+            </div>
+            <div class="boxScatto">
+              <label for="inputScattoPG">Scatto</label><br />
+              <input type="text" id="inputScattoPG" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item4">
+        <div class="gridContainer_parametri">
+          <div class="parametri1">
+            <label for="InputAttacco">Attacco</label><br />
+            <input type="number" id="InputAttacco" class="input-parametro" /><br />
+            <div class="bonusContainer">
+              <input type="number" id="attaccoBonus1" class="input-bonus" placeholder="Bonus 1" />
+              <input type="number" id="attaccoBonus2" class="input-bonus" placeholder="Bonus 2" />
+            </div>
+          </div>
+          <div class="parametri2">
+            <label for="InputMira">Mira</label><br />
+            <input type="number" id="InputMira" class="input-parametro" /><br />
+            <div class="bonusContainer">
+              <input type="number" id="miraBonus1" class="input-bonus" placeholder="Bonus 1" />
+              <input type="number" id="miraBonus2" class="input-bonus" placeholder="Bonus 2" />
+            </div>
+          </div>
+          <div class="parametri3">
+            <label for="InputResistenza">Resistenza</label><br />
+            <input type="number" id="InputResistenza" class="input-parametro" /><br />
+            <div class="bonusContainer">
+              <input type="number" id="resistenzaBonus1" class="input-bonus" placeholder="Bonus 1" />
+              <input type="number" id="resistenzaBonus2" class="input-bonus" placeholder="Bonus 2" />
+            </div>
+          </div>
+          <div class="parametri4">
+            <label for="InputVelocita">Velocita</label><br />
+            <input type="number" id="InputVelocita" class="input-parametro" /><br />
+            <div class="bonusContainer">
+              <input type="number" id="velocitaBonus1" class="input-bonus" placeholder="Bonus 1" />
+              <input type="number" id="velocitaBonus2" class="input-bonus" placeholder="Bonus 2" />
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <script>
-      // Array per memorizzare i riferimenti di tutti i talenti
-      let talenti = [];
+      <div class="item5">
+        <div class="BoxTratti flexInput">
+          <label for="IntellettoValue">Intelletto</label><br />
+          <input type="number" id="IntellettoValue1" />
+          <input type="number" id="IntellettoValue2" />
+        </div>
 
-      function preventEvent() {
-        if (event) event.preventDefault();
-      }
+        <div class="BoxTratti flexInput">
+          <label for="SensiValue">Sensi</label><br />
+          <input type="number" id="SensiValue1" />
+          <input type="number" id="SensiValue2" />
+        </div>
 
-      // Al caricamento della pagina, aggiungi i talenti iniziali
-      window.onload = function () {
-        const talentiIniziali = document.querySelectorAll(".boxTalenti");
-        talenti = Array.from(talentiIniziali); // Converte NodeList in array e assegna all'array talenti
-      };
+        <div class="BoxTratti flexInput">
+          <label for="AdattabilitaValue">Adattabilita</label><br />
+          <input type="number" id="AdattabilitaValue1" />
+          <input type="number" id="AdattabilitaValue2" />
+        </div>
 
-      function aggiungiTalento() {
-        preventEvent(); // Se non è definita, rimuovi questa linea.
+        <div class="BoxTratti flexInput">
+          <label for="IstintoValue">Istinto</label><br />
+          <input type="number" id="IstintoValue1" />
+          <input type="number" id="IstintoValue2" />
+        </div>
 
-        const nuovoBoxTalenti = document.createElement("div");
-        nuovoBoxTalenti.className = "boxTalenti";
-        nuovoBoxTalenti.innerHTML = `
+        <div class="BoxTratti flexInput">
+          <label for="FisicoValue">Fisico</label><br />
+          <input type="number" id="FisicoValue1" />
+          <input type="number" id="FisicoValue2" />
+        </div>
+
+        <div class="BoxTratti flexInput">
+          <label for="RobustezzaValue">Robustezza</label><br />
+          <input type="number" id="RobustezzaValue1" />
+          <input type="number" id="RobustezzaValue2" />
+        </div>
+      </div>
+      <div class="item6">
+        <div class="BoxValore flexInput">
+          <label for="InputHP">Punti Vita</label><br />
+          <input type="number" id="InputHP" />
+          <input type="number" id="InputMaxHP" /><br />
+          <label for="InputRecuperoHP">Recupero</label>
+          <input type="number" id="InputRecuperoHP" />
+        </div>
+        <div class="BoxValore flexInput">
+          <label for="InputStamina">Stamina</label><br />
+          <input type="number" id="InputStamina" />
+          <input type="number" id="InputStaminaMax" /><br />
+          <label for="InputRecuperoStamina">Recupero</label>
+          <input type="number" id="InputRecuperoStamina" />
+        </div>
+        <div class="BoxValore flexInput">
+          <label for="InputNucleo_Innesto">Nucleo/Innesto</label><br />
+          <input type="number" id="InputNucleo_Innesto" />
+          <input type="number" id="InputNucleo_InnestoMax" /><br />
+          <label for="InputRecuperoNucleo_Innesto">Recupero</label>
+          <input type="number" id="InputRecuperoNucleo_Innesto" />
+        </div>
+        <div class="BoxValore flexInput">
+          <label for="InputContatore">Contatore</label><br />
+          <input type="text" id="InputContatore" />
+        </div>
+      </div>
+      <div class="item7 itemstretch">
+        <label for="Inputdeformazione_innescoText">Deformazione e Innesco</label><br />
+        <textarea name="deformazione_innescoText" id="Inputdeformazione_innescoText" class="ExpandText"></textarea>
+      </div>
+      <div class="item8 itemstretch">
+        <div class="BoxTitoloElementi">
+          <h3>Talenti</h3>
+        </div>
+        <div id="talentiContainer"></div>
+        <div class="buttonTalenti">
+          <button onclick="aggiungiTalento()">Aggiungi</button>
+          <button onclick="rimuoviTalento()">Rimuovi</button>
+        </div>
+      </div>
+      <div class="item9">
+        <table id="tecnicheTable">
+          <tr>
+            <th>Tecnica</th>
+            <th>Costo</th>
+          </tr>
+        </table>
+        <button onclick="AggiungiRiga()">Aggiungi Tecnica</button>
+      </div>
+      <div class="item10 itemstretch">
+        inventario
+        <div class="invantarioBox Boxexpand">
+          <textarea class="ExpandText" id="inventarioText" name="inventarioText" id="" cols="30" rows="10"></textarea>
+        </div>
+      </div>
+      <div class="item11 itemstretch">
+        note
+        <div class="noteBox Boxexpand">
+          <textarea class="ExpandText" id="noteText" name="noteText" id="" cols="30" rows="10"></textarea>
+        </div>
+      </div>
+      <div class="item12 itemstretch">
+        Background
+        <div class="backgroundBox Boxexpand">
+          <textarea class="ExpandText" id="backgroundText" name="backgroundText" id="" cols="30" rows="10"></textarea>
+        </div>
+      </div>
+      <div class="item13 itemstretch">
+        Descrzione
+        <div class="descrzioneBox Boxexpand">
+          <textarea class="ExpandText" id="descrzioneText" name="descrzioneText" id="" cols="30" rows="10"></textarea>
+        </div>
+      </div>
+      <div class="item14 itemstretch">
+        Personalita
+        <div class="personalitaBox Boxexpand">
+          <textarea class="ExpandText" id="personalitaText" name="personalitaText" id="" cols="30" rows="10"></textarea>
+        </div>
+      </div>
+      <div class="item15 itemstretch">
+        Obbiettivi
+        <div class="obbiettiviBox Boxexpand">
+          <textarea class="ExpandText" id="obbiettiviText" name="obbiettiviText" id="" cols="30" rows="10"></textarea>
+        </div>
+      </div>
+      <div class="item16">
+        <div class="footerText">
+          <p>Scheda creata da Simone Siepi</p>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <script>
+    // Array per memorizzare i riferimenti di tutti i talenti
+    let talenti = [];
+
+    let scheda = {
+      nomeGiocatore: null,
+      ImmaginePG: null,
+      livelloPg: null,
+      caratteristiche: {
+        nomePg: null,
+        razzaPg: null,
+        classe: null,
+        movimento: null,
+        scatto: null,
+      },
+      parametri: {
+        attacco: null,
+        mira: null,
+        resistenza: null,
+        velocita: null,
+        bonusParametri: {
+          attaccoBonus1: null,
+          attaccoBonus2: null,
+          miraBonus1: null,
+          miraBonus2: null,
+          resistenzaBonus1: null,
+          resistenzaBonus2: null,
+          velocitaBonus1: null,
+          velocitaBonus2: null,
+        },
+      },
+      tratti: {
+        intelletto: [],
+        sensi: [],
+        adattabilita: [],
+        istinto: [],
+        fisico: [],
+        robustezza: [],
+      },
+      valori: {
+        HP: [],
+        stamina: [],
+        nucleoInnesto: [],
+        contatore: null,
+        recupero: {
+          recuperoHP: null,
+          recuperoStamina: null,
+          recuperoNucleoInnesto: null,
+        },
+      },
+      talenti: [],
+      tecniche: [],
+      inventario: null,
+      note: null,
+      background: null,
+      descrizione: null,
+      personalita: null,
+      obiettivi: null,
+    };
+
+    function preventEvent() {
+      if (event) event.preventDefault();
+    }
+
+    // Al caricamento della pagina, aggiungi i talenti iniziali
+    window.onload = function () {
+      const talentiIniziali = document.querySelectorAll(".boxTalenti");
+      talenti = Array.from(talentiIniziali); // Converte NodeList in array e assegna all'array talenti
+    };
+
+    function aggiungiTalento() {
+      preventEvent(); // Se non è definita, rimuovi questa linea.
+
+      const nuovoBoxTalenti = document.createElement("div");
+      nuovoBoxTalenti.className = "boxTalenti";
+      nuovoBoxTalenti.innerHTML = `
         <input type="text" name="nameTalento" placeholder="nome talento"><br>
         <div class="talento-wrapper">
           <textarea class="ExpandText" name="textTalento" cols="55" rows="2"></textarea>
@@ -858,55 +786,55 @@
         </div>
         `;
 
-        // Aggiungi il box al contenitore
-        const talentiContainer = document.getElementById("talentiContainer");
-        talentiContainer.appendChild(nuovoBoxTalenti);
-        talenti.push(nuovoBoxTalenti);
+      // Aggiungi il box al contenitore
+      const talentiContainer = document.getElementById("talentiContainer");
+      talentiContainer.appendChild(nuovoBoxTalenti);
+      talenti.push(nuovoBoxTalenti);
+    }
+
+    function rimuoviTalento() {
+      preventEvent();
+
+      // Chiede all'utente il numero del talento da rimuovere
+      const numero = parseInt(
+        prompt(
+          "Inserisci il numero del talento da rimuovere (1 per il primo, 2 per il secondo, ecc. sono numerati dall'altro verso il basso):"
+        )
+      );
+
+      // Verifica se il numero è valido
+      if (numero > 0 && numero <= talenti.length) {
+        // Rimuovi il talento dall'array e dal DOM
+        const talentoDaRimuovere = talenti[numero - 1];
+        talentoDaRimuovere.remove(); // Rimuove il box dal DOM
+        talenti.splice(numero - 1, 1); // Rimuove il riferimento dall'array
+      } else {
+        alert("Numero non valido. Riprova.");
       }
+    }
+    /* 
+          function aggiornaNumeriTalenti() {
+            // Aggiunge o aggiorna i numeri per ciascun talento
+            talenti.forEach((talento, index) => {
+              // Se non esiste, crea l'elemento per mostrare il numero del talento
+              let numeroElemento = talento.querySelector(".numero-talento");
+              if (!numeroElemento) {
+                numeroElemento = document.createElement("span");
+                numeroElemento.className = "numero-talento";
+                talento.prepend(numeroElemento); // Posiziona il numero in cima al box
+              }
+              // Aggiorna il testo con il numero corretto
+              numeroElemento.textContent = `Talento #${index + 1}`;
+            });
+          } */
 
-      function rimuoviTalento() {
-        preventEvent();
+    function AggiungiRiga() {
+      preventEvent();
+      const tableBody = document.querySelector("#tecnicheTable");
 
-        // Chiede all'utente il numero del talento da rimuovere
-        const numero = parseInt(
-          prompt(
-            "Inserisci il numero del talento da rimuovere (1 per il primo, 2 per il secondo, ecc. sono numerati dall'altro verso il basso):"
-          )
-        );
+      const newRow = document.createElement("tr");
 
-        // Verifica se il numero è valido
-        if (numero > 0 && numero <= talenti.length) {
-          // Rimuovi il talento dall'array e dal DOM
-          const talentoDaRimuovere = talenti[numero - 1];
-          talentoDaRimuovere.remove(); // Rimuove il box dal DOM
-          talenti.splice(numero - 1, 1); // Rimuove il riferimento dall'array
-        } else {
-          alert("Numero non valido. Riprova.");
-        }
-      }
-/* 
-      function aggiornaNumeriTalenti() {
-        // Aggiunge o aggiorna i numeri per ciascun talento
-        talenti.forEach((talento, index) => {
-          // Se non esiste, crea l'elemento per mostrare il numero del talento
-          let numeroElemento = talento.querySelector(".numero-talento");
-          if (!numeroElemento) {
-            numeroElemento = document.createElement("span");
-            numeroElemento.className = "numero-talento";
-            talento.prepend(numeroElemento); // Posiziona il numero in cima al box
-          }
-          // Aggiorna il testo con il numero corretto
-          numeroElemento.textContent = `Talento #${index + 1}`;
-        });
-      } */
-
-      function AggiungiRiga() {
-        preventEvent();
-        const tableBody = document.querySelector("#tecnicheTable");
-
-        const newRow = document.createElement("tr");
-
-        newRow.innerHTML = `
+      newRow.innerHTML = `
         <td>
           <input type="text" placeholder="Nome tecnica" class="nomeTecnica"><br>
           <textarea placeholder="Descrizione tecnica" cols="50" rows="2" class="descrzioneTecnica"></textarea>
@@ -919,253 +847,258 @@
         </td>
       `;
 
-        tableBody.appendChild(newRow);
+      tableBody.appendChild(newRow);
+    }
+
+    function rimuoviRiga(button) {
+      // Trova la riga contenente il pulsante cliccato
+      const row = button.closest("tr");
+
+      // Rimuove la riga dalla tabella
+      row.remove();
+    }
+
+    function aggiornaAnteprimaImmagine(src) {
+      const previewImage = document.getElementById("previewImage");
+      const removeButton = document.getElementById("removeButton");
+      const fileInput = document.getElementById("image");
+
+      if (src) {
+        console.log("src:",src);
+        previewImage.src = src; // Imposta la sorgente dell'immagine
+        previewImage.style.display = "block";
+        removeButton.style.display = "inline-block";
+        fileInput.style.display = "none";
+      } else {
+        // Resetta l'anteprima se non ci sono immagini
+        previewImage.src = "";
+        previewImage.style.display = "none";
+        removeButton.style.display = "none";
+        fileInput.style.display = "block";
       }
+    }
 
-      function rimuoviRiga(button) {
-        // Trova la riga contenente il pulsante cliccato
-        const row = button.closest("tr");
 
-        // Rimuove la riga dalla tabella
-        row.remove();
-      }
+    function caricaImmagine(event) {
+      preventEvent();
+      const file = event.target.files[0];
 
-      function aggiornaAnteprimaImmagine(src) {
-        const previewImage = document.getElementById("previewImage");
-        const removeButton = document.getElementById("removeButton");
-        const fileInput = document.getElementById("image");
+      if (file) {
+        const reader = new FileReader();
 
-        if (src) {
-          previewImage.src = src; // Aggiorna l'anteprima con la sorgente
-          previewImage.style.display = "block"; // Mostra l'immagine
-          removeButton.style.display = "inline-block"; // Mostra il pulsante di rimozione
-          fileInput.style.display = "none"; // Nascondi l'input file
-        } else {
-          // Resetta l'anteprima se non ci sono immagini
-          previewImage.src = "";
-          previewImage.style.display = "none";
-          removeButton.style.display = "none";
-          fileInput.style.display = "block"; // Rendi visibile l'input file
-        }
-      }
-
-      function caricaImmagine(event) {
-        preventEvent();
-        const file = event.target.files[0];
-
-        if (file) {
-          const reader = new FileReader();
-
-          reader.onload = function (e) {
-            aggiornaAnteprimaImmagine(e.target.result); // Passa la sorgente base64
-          };
-
-          reader.readAsDataURL(file);
-        }
-      }
-
-      function rimuoviImmagine() {
-        aggiornaAnteprimaImmagine(null); // Resetta l'anteprima
-      }
-
-      // Funzione che converte un file in una stringa Base64 e restituisce una Promise
-      function convertFileToBase64(file) {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = function (event) {
-            resolve(event.target.result); // Risolve la Promise con il risultato in base64
-          };
-          reader.onerror = function () {
-            reject("Errore nella lettura del file.");
-          };
-          reader.readAsDataURL(file);
-        });
-      }
-
-      // Funzione che converte l'immagine in base64 e la salva nella scheda
-      async function img64Converter(scheda) {
-        const fileInput = document.getElementById("image");
-        const file = fileInput.files[0];
-
-        if (file) {
-          try {
-            const base64Image = await convertFileToBase64(file); // Attende il risultato
-            scheda.ImmaginePG = base64Image;
-            //console.log("Dati scheda con immagine:", JSON.stringify(scheda));
-          } catch (error) {
-            console.warn(error);
-          }
-        } else {
-          console.warn("Nessun file selezionato.");
-        }
-      }
-
-      function salvaTalenti(scheda) {
-        let talentiContainer = document
-          .getElementById("talentiContainer")
-          .querySelectorAll(".boxTalenti");
-        console.log(talentiContainer);
-        talentiContainer.forEach((talento) => {
-          const nome = talento.querySelector("input[name='nameTalento']").value;
-          const descrizione = talento.querySelector(
-            "textarea[name='textTalento']"
-          ).value;
-          const livello = talento.querySelector("input.levelTalento").value;
-          scheda.talenti.push({ nome, descrizione, livello });
-        });
-      }
-
-      function salvaTecniche(scheda) {
-        const tecnicheRows = document
-          .getElementById("tecnicheTable")
-          .querySelectorAll("tr");
-        tecnicheRows.forEach((row, index) => {
-          if (index === 0) return; // Salta l'intestazione
-          const nomeTecnica = row.querySelector(".nomeTecnica").value;
-          const descrizioneTecnica =
-            row.querySelector(".descrzioneTecnica").value;
-          const costoTecnica = row.querySelector(".costoTecnica").value;
-          scheda.tecniche.push({
-            nomeTecnica,
-            descrizioneTecnica,
-            costoTecnica,
-          });
-        });
-      }
-
-      async function salvaDati() {
-        preventEvent();
-
-        let scheda = {
-          nomeGiocatore: document.getElementById("PlayerName").value,
-          ImmaginePG: null,
-          livelloPg: document.getElementById("PgLv").value,
-          caratteristiche: {
-            nomePg: document.getElementById("inputPgName").value,
-            razzaPg: document.getElementById("inputPgRace").value,
-            classe: document.getElementById("inputPgClass").value,
-            movimento: document.getElementById("inputMovimentoPG").value,
-            scatto: document.getElementById("inputScattoPG").value,
-          },
-          parametri: {
-            attacco: document.getElementById("InputAttacco").value,
-            mira: document.getElementById("InputMira").value,
-            resistenza: document.getElementById("InputResistenza").value,
-            velocita: document.getElementById("InputVelocita").value,
-            bonusParametri: {
-              attaccoBonus1: document.getElementById("attaccoBonus1").value,
-              attaccoBonus2: document.getElementById("attaccoBonus2").value,
-              miraBonus1: document.getElementById("miraBonus1").value,
-              miraBonus2: document.getElementById("miraBonus2").value,
-              resistenzaBonus1:
-                document.getElementById("resistenzaBonus1").value,
-              resistenzaBonus2:
-                document.getElementById("resistenzaBonus2").value,
-              velocitaBonus1: document.getElementById("velocitaBonus1").value,
-              velocitaBonus2: document.getElementById("velocitaBonus2").value,
-            },
-          },
-          tratti: {
-            intelletto: [
-              document.getElementById("IntellettoValue1").value,
-              document.getElementById("IntellettoValue2").value,
-            ],
-            sensi: [
-              document.getElementById("SensiValue1").value,
-              document.getElementById("SensiValue2").value,
-            ],
-            adattabilita: [
-              document.getElementById("AdattabilitaValue1").value,
-              document.getElementById("AdattabilitaValue2").value,
-            ],
-            istinto: [
-              document.getElementById("IstintoValue1").value,
-              document.getElementById("IntellettoValue2").value,
-            ],
-            fisico: [
-              document.getElementById("FisicoValue1").value,
-              document.getElementById("FisicoValue2").value,
-            ],
-            robustezza: [
-              document.getElementById("RobustezzaValue1").value,
-              document.getElementById("RobustezzaValue2").value,
-            ],
-          },
-          valori: {
-            HP: [
-              document.getElementById("InputHP").value,
-              document.getElementById("InputMaxHP").value,
-            ],
-            stamina: [
-              document.getElementById("InputStamina").value,
-              document.getElementById("InputStaminaMax").value,
-            ],
-            nucleoInnesto: [
-              document.getElementById("InputNucleo_Innesto").value,
-              document.getElementById("InputNucleo_InnestoMax").value,
-            ],
-            contatore: document.getElementById("InputContatore").value,
-            recupero: {
-              recuperoHP: document.getElementById("InputRecuperoHP").value,
-              recuperoStamina: document.getElementById("InputRecuperoStamina")
-                .value,
-              recuperoNucleoInnesto: document.getElementById(
-                "InputRecuperoNucleo_Innesto"
-              ).value,
-            },
-          },
-          talenti: [],
-          tecniche: [],
-          inventario: document.getElementById("inventarioText").value,
-          note: document.getElementById("noteText").value,
-          background: document.getElementById("backgroundText").value,
-          descrizione: document.getElementById("descrzioneText").value,
-          personalita: document.getElementById("personalitaText").value,
-          obiettivi: document.getElementById("obbiettiviText").value,
+        reader.onload = function (e) {
+          aggiornaAnteprimaImmagine(e.target.result); // Passa la sorgente base64
         };
 
-        salvaTalenti(scheda);
-        salvaTecniche(scheda);
-        await img64Converter(scheda);
-
-        const datiJson = JSON.stringify(scheda, null, 2);
-        //console.log(datiJson);
-
-        // Crea un Blob (un file temporaneo) contenente i dati JSON
-        const blob = new Blob([datiJson], { type: "application/json" });
-
-        // Crea un link per il download
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = `schedaPG.json`; // Nome del file di default
-
-        // Simula un click per avviare il download
-        link.click();
-
-        // Libera la memoria usata dal Blob temporaneo
-        URL.revokeObjectURL(link.href);
+        reader.readAsDataURL(file);
       }
+    }
 
-      function caricaTalenti(dati) {
-        const talentiContainer = document.getElementById("talentiContainer");
-        dati.talenti.forEach((talento) => {
-          const nuovoBoxTalenti = document.createElement("div");
-          nuovoBoxTalenti.className = "boxTalenti";
-          nuovoBoxTalenti.innerHTML = `
+    function rimuoviImmagine() {
+      aggiornaAnteprimaImmagine(null); // Resetta l'anteprima
+    }
+
+    // Funzione che converte un file in una stringa Base64 e restituisce una Promise
+    function convertFileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          resolve(event.target.result); // Risolve la Promise con il risultato in base64
+        };
+        reader.onerror = function () {
+          reject("Errore nella lettura del file.");
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Funzione che converte l'immagine in base64 e la salva nella scheda
+    async function img64Converter(scheda) {
+      const fileInput = document.getElementById("image");
+      const file = fileInput.files[0];
+
+      if (file) {
+        try {
+          const base64Image = await convertFileToBase64(file); // Attende il risultato
+          //console.log("sono normale:",document.getElementById("previewImage"));
+          scheda.ImmaginePG = base64Image;
+          //console.log("sono convertita:",scheda.ImmaginePG)
+          //console.log("Dati scheda con immagine:", JSON.stringify(scheda));
+        } catch (error) {
+          console.warn(error);
+        }
+      } else {
+        console.warn("Nessun file selezionato.");
+      }
+    }
+
+    function salvaTalenti(scheda) {
+      let talentiContainer = document
+        .getElementById("talentiContainer")
+        .querySelectorAll(".boxTalenti");
+      //console.log(talentiContainer);
+      talentiContainer.forEach((talento) => {
+        const nome = talento.querySelector("input[name='nameTalento']").value;
+        const descrizione = talento.querySelector(
+          "textarea[name='textTalento']"
+        ).value;
+        const livello = talento.querySelector("input.levelTalento").value;
+        scheda.talenti.push({ nome, descrizione, livello });
+      });
+    }
+
+    function salvaTecniche(scheda) {
+      const tecnicheRows = document
+        .getElementById("tecnicheTable")
+        .querySelectorAll("tr");
+      tecnicheRows.forEach((row, index) => {
+        if (index === 0) return; // Salta l'intestazione
+        const nomeTecnica = row.querySelector(".nomeTecnica").value;
+        const descrizioneTecnica =
+          row.querySelector(".descrzioneTecnica").value;
+        const costoTecnica = row.querySelector(".costoTecnica").value;
+        scheda.tecniche.push({
+          nomeTecnica,
+          descrizioneTecnica,
+          costoTecnica,
+        });
+      });
+    }
+
+    async function aggiornaDatiScheda() {
+      scheda = {
+        nomeGiocatore: document.getElementById("PlayerName").value,
+        ImmaginePG: null ,
+        livelloPg: document.getElementById("PgLv").value,
+        caratteristiche: {
+          nomePg: document.getElementById("inputPgName").value,
+          razzaPg: document.getElementById("inputPgRace").value,
+          classe: document.getElementById("inputPgClass").value,
+          movimento: document.getElementById("inputMovimentoPG").value,
+          scatto: document.getElementById("inputScattoPG").value,
+        },
+        parametri: {
+          attacco: document.getElementById("InputAttacco").value,
+          mira: document.getElementById("InputMira").value,
+          resistenza: document.getElementById("InputResistenza").value,
+          velocita: document.getElementById("InputVelocita").value,
+          bonusParametri: {
+            attaccoBonus1: document.getElementById("attaccoBonus1").value,
+            attaccoBonus2: document.getElementById("attaccoBonus2").value,
+            miraBonus1: document.getElementById("miraBonus1").value,
+            miraBonus2: document.getElementById("miraBonus2").value,
+            resistenzaBonus1:
+              document.getElementById("resistenzaBonus1").value,
+            resistenzaBonus2:
+              document.getElementById("resistenzaBonus2").value,
+            velocitaBonus1: document.getElementById("velocitaBonus1").value,
+            velocitaBonus2: document.getElementById("velocitaBonus2").value,
+          },
+        },
+        tratti: {
+          intelletto: [
+            document.getElementById("IntellettoValue1").value,
+            document.getElementById("IntellettoValue2").value,
+          ],
+          sensi: [
+            document.getElementById("SensiValue1").value,
+            document.getElementById("SensiValue2").value,
+          ],
+          adattabilita: [
+            document.getElementById("AdattabilitaValue1").value,
+            document.getElementById("AdattabilitaValue2").value,
+          ],
+          istinto: [
+            document.getElementById("IstintoValue1").value,
+            document.getElementById("IntellettoValue2").value,
+          ],
+          fisico: [
+            document.getElementById("FisicoValue1").value,
+            document.getElementById("FisicoValue2").value,
+          ],
+          robustezza: [
+            document.getElementById("RobustezzaValue1").value,
+            document.getElementById("RobustezzaValue2").value,
+          ],
+        },
+        valori: {
+          HP: [
+            document.getElementById("InputHP").value,
+            document.getElementById("InputMaxHP").value,
+          ],
+          stamina: [
+            document.getElementById("InputStamina").value,
+            document.getElementById("InputStaminaMax").value,
+          ],
+          nucleoInnesto: [
+            document.getElementById("InputNucleo_Innesto").value,
+            document.getElementById("InputNucleo_InnestoMax").value,
+          ],
+          contatore: document.getElementById("InputContatore").value,
+          recupero: {
+            recuperoHP: document.getElementById("InputRecuperoHP").value,
+            recuperoStamina: document.getElementById("InputRecuperoStamina").value,
+            recuperoNucleoInnesto: document.getElementById("InputRecuperoNucleo_Innesto").value,
+          },
+        },
+        talenti: [],
+        tecniche: [],
+        inventario: document.getElementById("inventarioText").value,
+        note: document.getElementById("noteText").value,
+        background: document.getElementById("backgroundText").value,
+        descrizione: document.getElementById("descrzioneText").value,
+        personalita: document.getElementById("personalitaText").value,
+        obiettivi: document.getElementById("obbiettiviText").value,
+      };
+      salvaTalenti(scheda);
+      salvaTecniche(scheda);
+      await img64Converter(scheda);
+      console.log("scheda aggiornata:",scheda);
+
+    }
+
+    async function salvaDati() {
+      preventEvent();
+      aggiornaDatiScheda();
+
+      const datiJson = JSON.stringify(scheda, null, 2);
+      //console.log(datiJson);
+
+      // Crea un Blob (un file temporaneo) contenente i dati JSON
+      const blob = new Blob([datiJson], { type: "application/json" });
+
+      // Crea un link per il download
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `schedaPG.json`; // Nome del file di default
+
+      // Simula un click per avviare il download
+      link.click();
+
+      // Libera la memoria usata dal Blob temporaneo
+      URL.revokeObjectURL(link.href);
+    }
+
+    function caricaTalenti(dati) {
+      const talentiContainer = document.getElementById("talentiContainer");
+      dati.talenti.forEach((talento) => {
+        const nuovoBoxTalenti = document.createElement("div");
+        nuovoBoxTalenti.className = "boxTalenti";
+        nuovoBoxTalenti.innerHTML = `
         <input type="text" name="nameTalento" value="${talento.nome}" placeholder="nome talento"/><br>
         <div class="talento-wrapper">
           <textarea class="ExpandText" name="textTalento">${talento.descrizione}</textarea>
           <input type="number" class="levelTalento" placeholder="LV" value="${talento.livello}">
         </div>`;
-          talentiContainer.appendChild(nuovoBoxTalenti);
-        });
-      }
+        talentiContainer.appendChild(nuovoBoxTalenti);
+      });
+    }
 
-      function caricaTecniche(dati) {
-        const tecnicheTable = document.getElementById("tecnicheTable");
-        dati.tecniche.forEach((tecnica) => {
-          const newRow = tecnicheTable.insertRow();
-          newRow.innerHTML = `
+    function caricaTecniche(dati) {
+      const tecnicheTable = document.getElementById("tecnicheTable");
+      dati.tecniche.forEach((tecnica) => {
+        const newRow = tecnicheTable.insertRow();
+        newRow.innerHTML = `
         <td>
           <input type="text" placeholder="Nome tecnica" class="nomeTecnica" value="${tecnica.nomeTecnica}"><br>
           <textarea placeholder="Descrizione tecnica" cols="50" rows="2" class="descrzioneTecnica">${tecnica.descrizioneTecnica}</textarea>
@@ -1176,120 +1109,155 @@
             <button class="deleteTecnica" onclick="rimuoviRiga(this)">X</button>
           </div>
         </td>`;
-        });
+      });
+    }
+
+    function caricaDati() {
+      const fileInput = document.getElementById("fileInput");
+      const file = fileInput.files[0];
+      //console.log("caricadati");
+
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+          try {
+            const datiCaricati = JSON.parse(event.target.result); // Converte il JSON in oggetto
+            caricaScheda(datiCaricati); // Chiama la funzione per aggiornare la pagina con i dati
+          } catch (error) {
+            console.error("Errore nella lettura del file JSON:", error);
+            alert("Errore nel file JSON. Verifica il formato.");
+          }
+        };
+
+        reader.readAsText(file);
+      }
+    }
+
+    function caricaScheda(dati) {
+      //dati del player
+      document.getElementById("PlayerName").value = dati.nomeGiocatore;
+      document.getElementById("PgLv").value = dati.livelloPg;
+      //dati del pg
+      document.getElementById("inputPgName").value =
+        dati.caratteristiche.nomePg;
+      document.getElementById("inputPgRace").value =
+        dati.caratteristiche.razzaPg;
+      document.getElementById("inputPgClass").value =
+        dati.caratteristiche.classe;
+      document.getElementById("inputMovimentoPG").value =
+        dati.caratteristiche.movimento;
+      document.getElementById("inputScattoPG").value =
+        dati.caratteristiche.scatto;
+
+      document.getElementById("InputAttacco").value = dati.parametri.attacco;
+      document.getElementById("InputMira").value = dati.parametri.mira;
+      document.getElementById("InputResistenza").value =
+        dati.parametri.resistenza;
+      document.getElementById("InputVelocita").value =
+        dati.parametri.velocita;
+
+      document.getElementById("attaccoBonus1").value =
+        dati.parametri.bonusParametri.attaccoBonus1;
+      document.getElementById("attaccoBonus2").value =
+        dati.parametri.bonusParametri.attaccoBonus2;
+      document.getElementById("miraBonus1").value =
+        dati.parametri.bonusParametri.miraBonus1;
+      document.getElementById("miraBonus2").value =
+        dati.parametri.bonusParametri.miraBonus2;
+      document.getElementById("resistenzaBonus1").value =
+        dati.parametri.bonusParametri.resistenzaBonus1;
+      document.getElementById("resistenzaBonus2").value =
+        dati.parametri.bonusParametri.resistenzaBonus2;
+      document.getElementById("velocitaBonus1").value =
+        dati.parametri.bonusParametri.velocitaBonus1;
+      document.getElementById("velocitaBonus2").value =
+        dati.parametri.bonusParametri.velocitaBonus2;
+
+      document.getElementById("IntellettoValue1").value =
+        dati.tratti.intelletto[0];
+      document.getElementById("IntellettoValue2").value =
+        dati.tratti.intelletto[1];
+      document.getElementById("SensiValue1").value = dati.tratti.sensi[0];
+      document.getElementById("SensiValue2").value = dati.tratti.sensi[1];
+      document.getElementById("AdattabilitaValue1").value =
+        dati.tratti.adattabilita[0];
+      document.getElementById("AdattabilitaValue2").value =
+        dati.tratti.adattabilita[1];
+      document.getElementById("IstintoValue1").value = dati.tratti.istinto[0];
+      document.getElementById("IstintoValue2").value = dati.tratti.istinto[1];
+      document.getElementById("FisicoValue1").value = dati.tratti.fisico[0];
+      document.getElementById("FisicoValue2").value = dati.tratti.fisico[1];
+      document.getElementById("RobustezzaValue1").value =
+        dati.tratti.robustezza[0];
+      document.getElementById("RobustezzaValue2").value =
+        dati.tratti.robustezza[1];
+
+      document.getElementById("InputHP").value = dati.valori.HP[0];
+      document.getElementById("InputMaxHP").valu = dati.valori.HP[1];
+      document.getElementById("InputStamina").value = dati.valori.stamina[0];
+      document.getElementById("InputStaminaMax").value =
+        dati.valori.stamina[1];
+      document.getElementById("InputNucleo_Innesto").value =
+        dati.valori.nucleoInnesto[0];
+      document.getElementById("InputNucleo_InnestoMax").value =
+        dati.valori.nucleoInnesto[1];
+      document.getElementById("InputContatore").value = dati.valori.contatore;
+      document.getElementById("InputRecuperoHP").value =
+        dati.valori.recupero.recuperoHP;
+      document.getElementById("InputRecuperoStamina").valu =
+        dati.valori.recupero.recuperoStamina;
+      document.getElementById("InputRecuperoNucleo_Innesto").value =
+        dati.valori.recupero.recuperoNucleoInnesto;
+
+      document.getElementById("inventarioText").value = dati.inventario;
+      document.getElementById("noteText").value = dati.note;
+      document.getElementById("backgroundText").value = dati.background;
+      document.getElementById("descrzioneText").value = dati.descrizione;
+      document.getElementById("personalitaText").value = dati.personalita;
+      document.getElementById("obbiettiviText").value = dati.obiettivi;
+
+      if (dati.ImmaginePG) {
+        aggiornaAnteprimaImmagine(dati.ImmaginePG);
+      } else {
+        aggiornaAnteprimaImmagine(null);
       }
 
-      function caricaDati() {
-        const fileInput = document.getElementById("fileInput");
-        const file = fileInput.files[0];
-        console.log("caricadati");
+      caricaTalenti(dati);
+      caricaTecniche(dati);
+      //console.log("dati immagine:", dati.ImmaginePG);
+    }
 
-        if (file) {
-          const reader = new FileReader();
 
-          reader.onload = function (event) {
-            try {
-              const datiCaricati = JSON.parse(event.target.result); // Converte il JSON in oggetto
-              caricaSchedaJson(datiCaricati); // Chiama la funzione per aggiornare la pagina con i dati
-            } catch (error) {
-              console.error("Errore nella lettura del file JSON:", error);
-              alert("Errore nel file JSON. Verifica il formato.");
-            }
-          };
 
-          reader.readAsText(file);
+    async function saveToLocalStorage() {
+      await aggiornaDatiScheda();
+      console.log("scheda sta per essere salvata:",scheda);
+      localStorage.setItem('autoSave', JSON.stringify(scheda));
+      console.log('Dati salvati automaticamente nel LocalStorage.');
+    }
+
+    setInterval(async () => {
+      await saveToLocalStorage();
+    }, 5000);
+
+    function loadFromLocalStorage() {
+      // Recupera i dati salvati nel localStorage
+      const datiSalvati = localStorage.getItem('autoSave');
+      if (datiSalvati) {
+        try {
+          const schedaCaricata = JSON.parse(datiSalvati);
+          console.log("scheda caricata:",schedaCaricata);
+          caricaScheda(schedaCaricata);
+        } catch (error) {
+          console.error("Errore nel parsing dei dati salvati:", error);
         }
       }
+    }
 
-      function caricaSchedaJson(dati) {
-        //dati del player
-        document.getElementById("PlayerName").value = dati.nomeGiocatore;
-        document.getElementById("PgLv").value = dati.livelloPg;
-        //dati del pg
-        document.getElementById("inputPgName").value =
-          dati.caratteristiche.nomePg;
-        document.getElementById("inputPgRace").value =
-          dati.caratteristiche.razzaPg;
-        document.getElementById("inputPgClass").value =
-          dati.caratteristiche.classe;
-        document.getElementById("inputMovimentoPG").value =
-          dati.caratteristiche.movimento;
-        document.getElementById("inputScattoPG").value =
-          dati.caratteristiche.scatto;
+    window.onload = loadFromLocalStorage;
 
-        document.getElementById("InputAttacco").value = dati.parametri.attacco;
-        document.getElementById("InputMira").value = dati.parametri.mira;
-        document.getElementById("InputResistenza").value =
-          dati.parametri.resistenza;
-        document.getElementById("InputVelocita").value =
-          dati.parametri.velocita;
+  </script>
+</body>
 
-        document.getElementById("attaccoBonus1").value =
-          dati.parametri.bonusParametri.attaccoBonus1;
-        document.getElementById("attaccoBonus2").value =
-          dati.parametri.bonusParametri.attaccoBonus2;
-        document.getElementById("miraBonus1").value =
-          dati.parametri.bonusParametri.miraBonus1;
-        document.getElementById("miraBonus2").value =
-          dati.parametri.bonusParametri.miraBonus2;
-        document.getElementById("resistenzaBonus1").value =
-          dati.parametri.bonusParametri.resistenzaBonus1;
-        document.getElementById("resistenzaBonus2").value =
-          dati.parametri.bonusParametri.resistenzaBonus2;
-        document.getElementById("velocitaBonus1").value =
-          dati.parametri.bonusParametri.velocitaBonus1;
-        document.getElementById("velocitaBonus2").value =
-          dati.parametri.bonusParametri.velocitaBonus2;
-
-        document.getElementById("IntellettoValue1").value =
-          dati.tratti.intelletto[0];
-        document.getElementById("IntellettoValue2").value =
-          dati.tratti.intelletto[1];
-        document.getElementById("SensiValue1").value = dati.tratti.sensi[0];
-        document.getElementById("SensiValue2").value = dati.tratti.sensi[1];
-        document.getElementById("AdattabilitaValue1").value =
-          dati.tratti.adattabilita[0];
-        document.getElementById("AdattabilitaValue2").value =
-          dati.tratti.adattabilita[1];
-        document.getElementById("IstintoValue1").value = dati.tratti.istinto[0];
-        document.getElementById("IstintoValue2").value = dati.tratti.istinto[1];
-        document.getElementById("FisicoValue1").value = dati.tratti.fisico[0];
-        document.getElementById("FisicoValue2").value = dati.tratti.fisico[1];
-        document.getElementById("RobustezzaValue1").value =
-          dati.tratti.robustezza[0];
-        document.getElementById("RobustezzaValue2").value =
-          dati.tratti.robustezza[1];
-
-        document.getElementById("InputHP").value = dati.valori.HP[0];
-        document.getElementById("InputMaxHP").valu = dati.valori.HP[1];
-        document.getElementById("InputStamina").value = dati.valori.stamina[0];
-        document.getElementById("InputStaminaMax").value =
-          dati.valori.stamina[1];
-        document.getElementById("InputNucleo_Innesto").value =
-          dati.valori.nucleoInnesto[0];
-        document.getElementById("InputNucleo_InnestoMax").value =
-          dati.valori.nucleoInnesto[1];
-        document.getElementById("InputContatore").value = dati.valori.contatore;
-        document.getElementById("InputRecuperoHP").value =
-          dati.valori.recupero.recuperoHP;
-        document.getElementById("InputRecuperoStamina").valu =
-          dati.valori.recupero.recuperoStamina;
-        document.getElementById("InputRecuperoNucleo_Innesto").value =
-          dati.valori.recupero.recuperoNucleoInnesto;
-
-        document.getElementById("inventarioText").value = dati.inventario;
-        document.getElementById("noteText").value = dati.note;
-        document.getElementById("backgroundText").value = dati.background;
-        document.getElementById("descrzioneText").value = dati.descrizione;
-        document.getElementById("personalitaText").value = dati.personalita;
-        document.getElementById("obbiettiviText").value = dati.obiettivi;
-
-        caricaTalenti(dati);
-        caricaTecniche(dati);
-        if (dati.ImmaginePG) {
-          aggiornaAnteprimaImmagine(dati.ImmaginePG);
-        }
-      }
-    </script>
-  </body>
 </html>
