@@ -1239,7 +1239,7 @@
 
     setInterval(async () => {
       await saveToLocalStorage();
-    }, 5000);
+    }, 5*60*1000);
 
     function loadFromLocalStorage() {
       // Recupera i dati salvati nel localStorage
