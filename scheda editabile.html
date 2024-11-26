@@ -637,7 +637,7 @@
         </div>
       </div>
       <div class="item7 itemstretch">
-        <label for="Inputdeformazione_innescoText">Deformazione e Innesco</label><br />
+        <label for="Inputdeformazione_innescoText">Deformazione e Innesto</label><br />
         <textarea name="deformazione_innescoText" id="Inputdeformazione_innescoText" class="ExpandText"></textarea>
       </div>
       <div class="item8 itemstretch">
@@ -812,21 +812,20 @@
         alert("Numero non valido. Riprova.");
       }
     }
-    /* 
-          function aggiornaNumeriTalenti() {
-            // Aggiunge o aggiorna i numeri per ciascun talento
-            talenti.forEach((talento, index) => {
-              // Se non esiste, crea l'elemento per mostrare il numero del talento
-              let numeroElemento = talento.querySelector(".numero-talento");
-              if (!numeroElemento) {
-                numeroElemento = document.createElement("span");
-                numeroElemento.className = "numero-talento";
-                talento.prepend(numeroElemento); // Posiziona il numero in cima al box
-              }
-              // Aggiorna il testo con il numero corretto
-              numeroElemento.textContent = `Talento #${index + 1}`;
-            });
-          } */
+    function aggiornaNumeriTalenti() {
+      // Aggiunge o aggiorna i numeri per ciascun talento
+      talenti.forEach((talento, index) => {
+        // Se non esiste, crea l'elemento per mostrare il numero del talento
+        let numeroElemento = talento.querySelector(".numero-talento");
+        if (!numeroElemento) {
+          numeroElemento = document.createElement("span");
+          numeroElemento.className = "numero-talento";
+          talento.prepend(numeroElemento); // Posiziona il numero in cima al box
+        }
+        // Aggiorna il testo con il numero corretto
+        numeroElemento.textContent = `Talento #${index + 1}`;
+      });
+    }
 
     function AggiungiRiga() {
       preventEvent();
@@ -864,7 +863,7 @@
       const fileInput = document.getElementById("image");
 
       if (src) {
-        console.log("src:",src);
+        console.log("src:", src);
         previewImage.src = src; // Imposta la sorgente dell'immagine
         previewImage.style.display = "block";
         removeButton.style.display = "inline-block";
@@ -919,18 +918,19 @@
 
       if (file) {
         try {
-          const base64Image = await convertFileToBase64(file); // Attende il risultato
-          //console.log("sono normale:",document.getElementById("previewImage"));
-          scheda.ImmaginePG = base64Image;
-          //console.log("sono convertita:",scheda.ImmaginePG)
-          //console.log("Dati scheda con immagine:", JSON.stringify(scheda));
+          // Se un file è stato selezionato, convertilo in Base64
+          const base64Image = await convertFileToBase64(file);
+          scheda.ImmaginePG = base64Image; // Salva l'immagine in formato Base64
         } catch (error) {
-          console.warn(error);
+          console.warn("Errore nella conversione dell'immagine:", error);
         }
+      } else if (scheda.ImmaginePG) {
+        console.info("L'immagine è già presente in Base64, salvataggio mantenuto.");
       } else {
-        console.warn("Nessun file selezionato.");
+        console.warn("Nessun file selezionato e nessuna immagine esistente.");
       }
     }
+
 
     function salvaTalenti(scheda) {
       let talentiContainer = document
@@ -968,7 +968,7 @@
     async function aggiornaDatiScheda() {
       scheda = {
         nomeGiocatore: document.getElementById("PlayerName").value,
-        ImmaginePG: null ,
+        ImmaginePG: null, //prossima versione facciamo delle chiamate dirette
         livelloPg: document.getElementById("PgLv").value,
         caratteristiche: {
           nomePg: document.getElementById("inputPgName").value,
@@ -1053,14 +1053,14 @@
       salvaTalenti(scheda);
       salvaTecniche(scheda);
       await img64Converter(scheda);
-      console.log("scheda aggiornata:",scheda);
+      console.log("scheda aggiornata:", scheda);
 
     }
 
     async function salvaDati() {
       preventEvent();
-      aggiornaDatiScheda();
-      saveToLocalStorage();
+      await aggiornaDatiScheda();
+      await saveToLocalStorage();
 
       const datiJson = JSON.stringify(scheda, null, 2);
       //console.log(datiJson);
@@ -1233,14 +1233,14 @@
 
     async function saveToLocalStorage() {
       await aggiornaDatiScheda();
-      console.log("scheda sta per essere salvata:",scheda);
+      console.log("scheda sta per essere salvata:", scheda.ImmaginePG);
       localStorage.setItem('autoSave', JSON.stringify(scheda));
       console.log('Dati salvati automaticamente nel LocalStorage.');
     }
 
     setInterval(async () => {
       await saveToLocalStorage();
-    }, 5*60*1000);
+    }, 5 * 60 * 1000);
 
     function loadFromLocalStorage() {
       // Recupera i dati salvati nel localStorage
@@ -1248,7 +1248,7 @@
       if (datiSalvati) {
         try {
           const schedaCaricata = JSON.parse(datiSalvati);
-          console.log("scheda caricata:",schedaCaricata);
+          console.log("scheda caricata:", schedaCaricata);
           caricaScheda(schedaCaricata);
         } catch (error) {
           console.error("Errore nel parsing dei dati salvati:", error);
