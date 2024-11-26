@@ -1060,6 +1060,7 @@
     async function salvaDati() {
       preventEvent();
       aggiornaDatiScheda();
+      saveToLocalStorage();
 
       const datiJson = JSON.stringify(scheda, null, 2);
       //console.log(datiJson);
